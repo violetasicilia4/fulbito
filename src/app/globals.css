@@ -1,0 +1,47 @@
+@import "tailwindcss";
+
+:root {
+  --background: #fdf4f9;
+  --foreground: #2b1730;
+
+  --color-prode-pink: #ff4f93;
+  --color-prode-pink-dark: #e23e7d;
+  --color-prode-purple: #6d28d9;
+  --color-prode-purple-light: #a78bfa;
+  --color-prode-gold: #ffb648;
+  --color-prode-mint: #2dd4bf;
+  --color-prode-cream: #fff7fb;
+  --color-prode-ink: #2b1730;
+  --color-prode-line: #f3d9e8;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-pink: var(--color-prode-pink);
+  --color-pink-dark: var(--color-prode-pink-dark);
+  --color-purple: var(--color-prode-purple);
+  --color-purple-light: var(--color-prode-purple-light);
+  --color-gold: var(--color-prode-gold);
+  --color-mint: var(--color-prode-mint);
+  --color-cream: var(--color-prode-cream);
+  --color-ink: var(--color-prode-ink);
+  --color-line: var(--color-prode-line);
+  --font-sans: var(--font-quicksand);
+  --font-display: var(--font-baloo);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+}
+
+.font-display {
+  font-family: var(--font-display), var(--font-sans), sans-serif;
+}
+
+::selection {
+  background: var(--color-prode-pink);
+  color: white;
+}
