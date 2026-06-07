@@ -101,7 +101,6 @@ Centralizada en `src/lib/scoring.ts` (`calculatePoints`), con tests en
 
 - Resultado exacto → **6 puntos**
 - Acertar ganador o empate (sin el resultado exacto) → **3 puntos**
-- Acertar los goles de uno de los dos equipos (sin acertar el ganador) → **1 punto**
 - Cualquier otro caso → **0 puntos**
 
 La usa tanto el endpoint de carga manual de resultados

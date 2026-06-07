@@ -1,12 +1,9 @@
 /**
  * Single source of truth for the prode scoring rules:
- *  - Resultado exacto:                          6 puntos
+ *  - Resultado exacto:                    6 puntos
  *  - Acertás el ganador (o el empate)
- *    sin el resultado exacto:                   3 puntos
- *  - No acertás el ganador, pero le pegás
- *    a uno de los dos marcadores
- *    (los goles del local o los del visitante):  1 punto
- *  - Cualquier otro caso:                       0 puntos
+ *    sin el resultado exacto:             3 puntos
+ *  - Cualquier otro caso:                 0 puntos
  *
  * Used both by the manual results admin flow and (later) by any
  * automated results-sync job, so the rules only live in one place.
@@ -36,11 +33,6 @@ export function calculatePoints(
     matchOutcome(predictedHomeScore, predictedAwayScore);
 
   if (sameOutcome) return 3;
-
-  const oneScoreMatches =
-    realHomeScore === predictedHomeScore || realAwayScore === predictedAwayScore;
-
-  if (oneScoreMatches) return 1;
 
   return 0;
 }

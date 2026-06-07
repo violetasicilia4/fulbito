@@ -9,7 +9,6 @@ import { createClient } from "@/lib/supabase/client";
 const POINTS_INFO = [
   { points: 6, label: "Resultado exacto" },
   { points: 3, label: "Acertás el ganador o el empate" },
-  { points: 1, label: "Acertás los goles de uno de los dos equipos" },
   { points: 0, label: "No acertás nada" },
 ];
 
@@ -41,9 +40,7 @@ export function HowToScoreSection() {
                     ? "bg-purple text-pink"
                     : item.points === 3
                       ? "bg-pink/20 text-purple"
-                      : item.points === 1
-                        ? "bg-purple-light text-purple/70"
-                        : "bg-line text-ink/40"
+                      : "bg-line text-ink/40"
                 }`}
               >
                 +{item.points} {item.points === 1 ? "punto" : "puntos"}
