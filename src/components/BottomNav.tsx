@@ -2,34 +2,41 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { Sparkles, Calendar, Trophy, BookOpen } from "lucide-react";
 
 const ITEMS = [
-  { href: "/predicciones", label: "Predicciones", icon: "⚽️" },
-  { href: "/fixture", label: "Fixture", icon: "📅" },
-  { href: "/ranking", label: "Ranking", icon: "🏆" },
-  { href: "/reglas", label: "Reglas", icon: "📋" },
+  { href: "/predicciones", label: "Pronós", icon: Sparkles },
+  { href: "/fixture", label: "Fixture", icon: Calendar },
+  { href: "/ranking", label: "Ranking", icon: Trophy },
+  { href: "/reglas", label: "Reglas", icon: BookOpen },
 ];
 
 export function BottomNav() {
   const pathname = usePathname();
 
   return (
-    <nav className="fixed inset-x-0 bottom-0 z-30 border-t border-line bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/80 sm:hidden">
-      <ul className="mx-auto flex max-w-3xl items-stretch justify-between px-2 pb-[env(safe-area-inset-bottom)]">
+    <nav className="fixed inset-x-4 bottom-4 z-30 sm:hidden">
+      <ul className="mx-auto flex max-w-3xl items-center justify-between gap-1 rounded-[22px] border border-line bg-white/95 p-1.5 shadow-[0_8px_30px_rgba(0,0,0,0.08)] backdrop-blur supports-[backdrop-filter]:bg-white/80">
         {ITEMS.map((item) => {
           const active = pathname?.startsWith(item.href);
+          const Icon = item.icon;
           return (
-            <li key={item.href} className="flex-1">
+            <li
+              key={item.href}
+              className={`flex transition-[flex-grow] duration-300 ease-out ${active ? "flex-[1.3]" : "flex-1"}`}
+            >
               <Link
                 href={item.href}
-                className={`flex flex-col items-center gap-0.5 py-2 text-xs font-semibold transition-colors ${
-                  active ? "text-pink-dark" : "text-zinc-400"
+                className={`flex w-full items-center justify-center gap-1.5 rounded-full py-2.5 text-[10px] font-black uppercase tracking-tight transition-all duration-200 ${
+                  active ? "bg-purple text-pink shadow-md shadow-purple/20" : "text-ink/40 hover:text-purple"
                 }`}
               >
-                <span className={`text-lg ${active ? "scale-110" : ""} transition-transform`}>
-                  {item.icon}
-                </span>
-                {item.label}
+                <Icon
+                  className={`shrink-0 transition-all duration-200 ${
+                    active ? "h-3.5 w-3.5 stroke-[2.5px]" : "h-5 w-5 stroke-[1.8px]"
+                  }`}
+                />
+                {active && <span className="leading-none">{item.label}</span>}
               </Link>
             </li>
           );

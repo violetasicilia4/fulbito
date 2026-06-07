@@ -39,8 +39,8 @@ export function TopBar({ displayName, isAdmin }: { displayName: string; isAdmin:
                 href={item.href}
                 className={`rounded-full px-3 py-1.5 text-sm font-semibold transition-colors ${
                   active
-                    ? "bg-pink/15 text-pink-dark"
-                    : "text-ink/60 hover:bg-pink/10 hover:text-pink-dark"
+                    ? "bg-purple text-pink shadow-sm shadow-purple/20"
+                    : "text-ink/60 hover:bg-purple/10 hover:text-purple"
                 }`}
               >
                 {item.label}
