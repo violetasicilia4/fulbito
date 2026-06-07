@@ -1,11 +1,7 @@
 import { NextResponse } from "next/server";
-import { requireAdmin } from "@/lib/admin-guard";
 import { createParticipantAccount } from "@/lib/create-participant";
 
 export async function POST(request: Request) {
-  const guard = await requireAdmin();
-  if ("response" in guard) return guard.response;
-
   let body: unknown;
   try {
     body = await request.json();
@@ -13,7 +9,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Solicitud inválida." }, { status: 400 });
   }
 
-  const { username, display_name, password, is_admin } = (body ?? {}) as Record<string, unknown>;
+  const { username, display_name, password } = (body ?? {}) as Record<string, unknown>;
 
   if (typeof username !== "string" || typeof display_name !== "string" || typeof password !== "string") {
     return NextResponse.json({ error: "Faltan datos: usuario, nombre visible y clave." }, { status: 400 });
@@ -23,7 +19,7 @@ export async function POST(request: Request) {
     username,
     displayName: display_name,
     password,
-    isAdmin: Boolean(is_admin),
+    isAdmin: false,
   });
 
   if ("error" in result) {

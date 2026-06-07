@@ -10,7 +10,9 @@ por WhatsApp.
 
 ## Pantallas
 
-- **/login** — ingreso con usuario + clave (sin emails ni registro público).
+- **/login** — ingreso o registro con usuario + clave (sin emails reales:
+  cualquiera puede crear su cuenta desde acá; el primer registro queda como
+  participante normal y el rol admin se asigna a mano).
 - **/predicciones** — pantalla principal: cargar/editar predicciones de la
   fase de grupos, agrupadas por grupo, con banderas, validaciones, guardado
   con feedback y bloqueo automático al iniciar cada partido.
@@ -35,11 +37,11 @@ por WhatsApp.
    - `supabase/seed.sql` (equipos y partidos de **ejemplo** — reemplazar por el
      fixture oficial real apenas esté confirmado, desde `/admin` o reescribiendo
      este archivo)
-3. Crear tu primera participante admin: hacelo manualmente desde el SQL Editor
-   o el dashboard de Supabase Auth (creando el usuario con el email
-   `tuusuario@fulbito.prode.local` — ver `src/lib/username.ts`) y luego insertá
-   su fila en `participants` con `is_admin = true` y el `auth_user_id`
-   correspondiente. Desde ahí ya podés crear al resto desde `/admin`.
+3. Creá tu primera cuenta directamente desde `/login → Crear cuenta` (queda
+   como participante normal). Para convertirla en admin, actualizá esa fila en
+   `participants` poniendo `is_admin = true` desde el SQL Editor o el dashboard
+   de Supabase. Desde ahí ya podés gestionar al resto desde `/admin`, o dejar
+   que cada quien cree su propia cuenta desde `/login`.
 4. Copiar `.env.local.example` a `.env.local` y completar las variables (ver
    abajo).
 5. Levantar el servidor de desarrollo:
