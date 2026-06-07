@@ -49,6 +49,7 @@ export async function createParticipantAccount({
   });
 
   if (createError || !created.user) {
+    console.error("createParticipantAccount: auth.admin.createUser failed", createError);
     const taken = createError?.message?.toLowerCase().includes("already");
     return {
       error: taken ? "Ese nombre de usuario ya está en uso. Probá con otro." : "No pudimos crear la cuenta. Probá de nuevo.",
@@ -68,6 +69,7 @@ export async function createParticipantAccount({
     .single();
 
   if (insertError || !participant) {
+    console.error("createParticipantAccount: participants insert failed", insertError);
     // Roll back the auth user so we don't leave an orphaned account behind.
     await admin.auth.admin.deleteUser(created.user.id);
     const taken = insertError?.message?.includes("duplicate");
