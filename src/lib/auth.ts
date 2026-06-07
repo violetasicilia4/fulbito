@@ -1,8 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
 import type { Participant } from "@/lib/supabase/types";
 
-export { usernameToEmail, normalizeUsername } from "@/lib/username";
-
 /** Returns the logged-in participant's profile row, or null if not authenticated. */
 export async function getCurrentParticipant(): Promise<Participant | null> {
   const supabase = await createClient();

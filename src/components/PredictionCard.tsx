@@ -149,6 +149,14 @@ export function PredictionCard({
         <TeamBadge team={match.away_team} align="end" />
       </div>
 
+      {savedPrediction && (
+        <p className="mt-3 rounded-2xl bg-mint/40 px-3 py-2 text-center text-xs font-semibold text-ink/70">
+          {dirty
+            ? `Tu predicción guardada es ${savedPrediction.predicted_home_score} – ${savedPrediction.predicted_away_score}. Cambiá los goles y volvé a guardar para actualizarla.`
+            : `Guardaste tu predicción: ${match.home_team?.name ?? "Local"} ${savedPrediction.predicted_home_score} – ${savedPrediction.predicted_away_score} ${match.away_team?.name ?? "Visitante"}.`}
+        </p>
+      )}
+
       {finished && match.home_score !== null && match.away_score !== null && (
         <p className="mt-3 text-center text-xs font-medium text-ink/50">
           Resultado real: {match.home_team?.name} {match.home_score} – {match.away_score}{" "}
@@ -168,7 +176,11 @@ export function PredictionCard({
             disabled={saveState === "saving" || (!dirty && saveState !== "error")}
             className="flex-1 rounded-2xl bg-pink px-4 py-2.5 text-sm font-bold text-white shadow-md shadow-pink/30 transition-transform active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50"
           >
-            {saveState === "saving" ? "Guardando…" : "Guardar predicción"}
+            {saveState === "saving"
+              ? "Guardando…"
+              : savedPrediction
+                ? "Actualizar predicción"
+                : "Guardar predicción"}
           </button>
           {saveState === "saved" && !dirty && (
             <span className="text-sm font-semibold text-emerald-600">✓ Guardada</span>

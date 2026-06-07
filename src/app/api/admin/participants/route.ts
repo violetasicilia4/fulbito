@@ -13,14 +13,14 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Solicitud inválida." }, { status: 400 });
   }
 
-  const { username, display_name, password, is_admin } = (body ?? {}) as Record<string, unknown>;
+  const { email, display_name, password, is_admin } = (body ?? {}) as Record<string, unknown>;
 
-  if (typeof username !== "string" || typeof display_name !== "string" || typeof password !== "string") {
-    return NextResponse.json({ error: "Faltan datos: usuario, nombre visible y clave." }, { status: 400 });
+  if (typeof email !== "string" || typeof display_name !== "string" || typeof password !== "string") {
+    return NextResponse.json({ error: "Faltan datos: email, nombre visible y clave." }, { status: 400 });
   }
 
   const result = await createParticipantAccount({
-    username,
+    email,
     displayName: display_name,
     password,
     isAdmin: Boolean(is_admin),

@@ -10,9 +10,10 @@ por WhatsApp.
 
 ## Pantallas
 
-- **/login** — ingreso o registro con usuario + clave (sin emails reales:
-  cualquiera puede crear su cuenta desde acá; el primer registro queda como
-  participante normal y el rol admin se asigna a mano).
+- **/login** — ingreso o registro con email + foto de perfil + clave
+  (cualquiera puede crear su cuenta desde acá subiendo una foto obligatoria;
+  el primer registro queda como participante normal y el rol admin se asigna
+  a mano).
 - **/predicciones** — pantalla principal: cargar/editar predicciones de la
   fase de grupos, agrupadas por grupo, con banderas, validaciones, guardado
   con feedback y bloqueo automático al iniciar cada partido.
@@ -73,10 +74,11 @@ Ver `supabase/schema.sql` para el detalle completo (incluye RLS y triggers).
 Resumen de tablas:
 
 - **participants** — perfil de cada participante, vinculado 1 a 1 con
-  `auth.users` vía `auth_user_id`. Login con usuario+clave: el username se
-  mapea a un email sintético (`usuario@fulbito.prode.local`, ver
-  `src/lib/username.ts`) para poder usar Supabase Auth sin pedir emails reales.
-- **teams** — selecciones, bandera (emoji) y grupo.
+  `auth.users` vía `auth_user_id`. Guarda `email`, `display_name` y
+  `avatar_url` (foto de perfil, obligatoria al registrarse, subida al bucket
+  de Storage `avatars`).
+- **teams** — selecciones, bandera (emoji + `flag_url` con la imagen real de
+  la bandera, mostrada como avatar circular) y grupo.
 - **matches** — partidos: fase, grupo, equipos, fecha/hora, estado, resultado
   real y `external_api_id` (para integrarlo luego con una API de resultados).
 - **predictions** — una predicción por participante y partido (constraint

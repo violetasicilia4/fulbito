@@ -6,6 +6,7 @@ export type Team = {
   name: string;
   country_code: string;
   flag_emoji: string | null;
+  flag_url: string | null;
   group_name: string | null;
 };
 
@@ -32,7 +33,8 @@ export type MatchWithTeams = Match & {
 export type Participant = {
   id: string;
   auth_user_id: string | null;
-  username: string;
+  email: string;
+  avatar_url: string | null;
   display_name: string;
   is_admin: boolean;
   created_at: string;
@@ -63,7 +65,7 @@ export interface Database {
     Tables: {
       participants: {
         Row: Participant;
-        Insert: Partial<Participant> & { username: string; display_name: string };
+        Insert: Partial<Participant> & { email: string; display_name: string };
         Update: Partial<Participant>;
         Relationships: [];
       };

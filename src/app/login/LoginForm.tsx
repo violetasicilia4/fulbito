@@ -1,9 +1,8 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useEffect, useMemo, useRef, useState, type FormEvent } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
-import { usernameToEmail, normalizeUsername } from "@/lib/username";
 
 type Mode = "login" | "signup";
 
@@ -11,12 +10,22 @@ export function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [mode, setMode] = useState<Mode>("login");
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [displayName, setDisplayName] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [avatarFile, setAvatarFile] = useState<File | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const avatarPreview = useMemo(() => (avatarFile ? URL.createObjectURL(avatarFile) : null), [avatarFile]);
+
+  useEffect(() => {
+    return () => {
+      if (avatarPreview) URL.revokeObjectURL(avatarPreview);
+    };
+  }, [avatarPreview]);
 
   function switchMode(next: Mode) {
     setMode(next);
@@ -25,27 +34,32 @@ export function LoginForm() {
     setConfirmPassword("");
   }
 
-  async function signIn(cleanUsername: string, rawPassword: string) {
+  function handleAvatarChange(event: React.ChangeEvent<HTMLInputElement>) {
+    const file = event.target.files?.[0] ?? null;
+    setAvatarFile(file);
+  }
+
+  async function signIn(cleanEmail: string, rawPassword: string) {
     const supabase = createClient();
     const { error: signInError } = await supabase.auth.signInWithPassword({
-      email: usernameToEmail(cleanUsername),
+      email: cleanEmail,
       password: rawPassword,
     });
     return signInError;
   }
 
-  async function handleLogin(cleanUsername: string) {
-    if (!cleanUsername || !password) {
-      setError("Completá tu usuario y tu clave para ingresar.");
+  async function handleLogin(cleanEmail: string) {
+    if (!cleanEmail || !password) {
+      setError("Completá tu email y tu clave para ingresar.");
       return;
     }
 
     setLoading(true);
-    const signInError = await signIn(cleanUsername, password);
+    const signInError = await signIn(cleanEmail, password);
     setLoading(false);
 
     if (signInError) {
-      setError("Usuario o clave incorrecta. Revisá los datos y probá de nuevo.");
+      setError("Email o clave incorrecta. Revisá los datos y probá de nuevo.");
       return;
     }
 
@@ -54,11 +68,15 @@ export function LoginForm() {
     router.refresh();
   }
 
-  async function handleSignup(cleanUsername: string) {
+  async function handleSignup(cleanEmail: string) {
     const cleanDisplayName = displayName.trim();
 
-    if (!cleanUsername || !cleanDisplayName || !password) {
-      setError("Completá tu usuario, tu nombre visible y tu clave.");
+    if (!cleanEmail || !cleanDisplayName || !password) {
+      setError("Completá tu email, tu nombre visible y tu clave.");
+      return;
+    }
+    if (!avatarFile) {
+      setError("Subí una foto de perfil para crear tu cuenta.");
       return;
     }
     if (password !== confirmPassword) {
@@ -68,11 +86,13 @@ export function LoginForm() {
 
     setLoading(true);
     try {
-      const response = await fetch("/api/auth/signup", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username: cleanUsername, display_name: cleanDisplayName, password }),
-      });
+      const formData = new FormData();
+      formData.set("email", cleanEmail);
+      formData.set("display_name", cleanDisplayName);
+      formData.set("password", password);
+      formData.set("avatar", avatarFile);
+
+      const response = await fetch("/api/auth/signup", { method: "POST", body: formData });
       const data = (await response.json().catch(() => ({}))) as { error?: string };
 
       if (!response.ok) {
@@ -81,7 +101,7 @@ export function LoginForm() {
         return;
       }
 
-      const signInError = await signIn(cleanUsername, password);
+      const signInError = await signIn(cleanEmail, password);
       setLoading(false);
 
       if (signInError) {
@@ -103,12 +123,12 @@ export function LoginForm() {
     event.preventDefault();
     setError(null);
 
-    const cleanUsername = normalizeUsername(username);
+    const cleanEmail = email.trim().toLowerCase();
 
     if (mode === "login") {
-      await handleLogin(cleanUsername);
+      await handleLogin(cleanEmail);
     } else {
-      await handleSignup(cleanUsername);
+      await handleSignup(cleanEmail);
     }
   }
 
@@ -152,19 +172,47 @@ export function LoginForm() {
             </button>
           </div>
 
+          {mode === "signup" && (
+            <div className="flex flex-col items-center gap-2">
+              <button
+                type="button"
+                onClick={() => fileInputRef.current?.click()}
+                className="group relative flex h-20 w-20 items-center justify-center overflow-hidden rounded-full border-2 border-dashed border-line bg-cream text-2xl text-ink/30 transition-colors hover:border-pink"
+                aria-label="Subir foto de perfil"
+              >
+                {avatarPreview ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img src={avatarPreview} alt="" className="h-full w-full object-cover" />
+                ) : (
+                  <span aria-hidden>📷</span>
+                )}
+              </button>
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept="image/png, image/jpeg, image/webp"
+                onChange={handleAvatarChange}
+                className="hidden"
+              />
+              <p className="text-xs font-medium text-ink/50">
+                {avatarFile ? "Foto lista. Tocá para cambiarla." : "Subí tu foto de perfil (obligatoria)"}
+              </p>
+            </div>
+          )}
+
           <div>
-            <label htmlFor="username" className="mb-1 block text-sm font-semibold text-ink">
-              Usuario
+            <label htmlFor="email" className="mb-1 block text-sm font-semibold text-ink">
+              Email
             </label>
             <input
-              id="username"
-              name="username"
-              type="text"
-              autoComplete="username"
+              id="email"
+              name="email"
+              type="email"
+              autoComplete="email"
               autoCapitalize="none"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              placeholder="ej: vale_campeona"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="ej: vale@gmail.com"
               className="w-full rounded-2xl border border-line bg-cream px-4 py-3 text-base text-ink outline-none transition-colors focus:border-pink focus:ring-2 focus:ring-pink/30"
             />
           </div>
@@ -198,7 +246,7 @@ export function LoginForm() {
               autoComplete={mode === "login" ? "current-password" : "new-password"}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="••••••••"
+              placeholder={mode === "login" ? "Ingresá tu clave" : "Elegí una clave (mín. 6 caracteres)"}
               className="w-full rounded-2xl border border-line bg-cream px-4 py-3 text-base text-ink outline-none transition-colors focus:border-pink focus:ring-2 focus:ring-pink/30"
             />
           </div>
@@ -215,7 +263,7 @@ export function LoginForm() {
                 autoComplete="new-password"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
-                placeholder="••••••••"
+                placeholder="Volvé a escribirla"
                 className="w-full rounded-2xl border border-line bg-cream px-4 py-3 text-base text-ink outline-none transition-colors focus:border-pink focus:ring-2 focus:ring-pink/30"
               />
             </div>

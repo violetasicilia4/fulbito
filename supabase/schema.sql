@@ -15,11 +15,27 @@ create extension if not exists "pgcrypto";
 create table if not exists participants (
   id uuid primary key default gen_random_uuid(),
   auth_user_id uuid unique references auth.users (id) on delete cascade,
-  username text unique not null,
+  email text,
+  avatar_url text,
   display_name text not null,
   is_admin boolean not null default false,
   created_at timestamptz not null default now()
 );
+
+-- Migración para proyectos creados antes de que el login pasara a ser por
+-- email real + foto de perfil (reemplaza al viejo esquema de `username`).
+alter table participants add column if not exists email text;
+alter table participants add column if not exists avatar_url text;
+alter table participants drop column if exists username;
+
+create unique index if not exists participants_email_key on participants (email);
+
+-- Bucket de Storage para las fotos de perfil (público para poder mostrarlas
+-- sin pedir un token; las subidas siempre pasan por el cliente admin/service
+-- role, que ignora las políticas de Storage).
+insert into storage.buckets (id, name, public)
+values ('avatars', 'avatars', true)
+on conflict (id) do nothing;
 
 comment on table participants is 'Perfil de cada participante del prode, vinculado a auth.users';
 

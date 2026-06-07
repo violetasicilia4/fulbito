@@ -5,7 +5,7 @@ import type { Participant } from "@/lib/supabase/types";
 
 export function ParticipantsAdmin({ initialParticipants }: { initialParticipants: Participant[] }) {
   const [participants, setParticipants] = useState(initialParticipants);
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [displayName, setDisplayName] = useState("");
   const [password, setPassword] = useState("");
   const [creating, setCreating] = useState(false);
@@ -22,7 +22,7 @@ export function ParticipantsAdmin({ initialParticipants }: { initialParticipants
       const res = await fetch("/api/admin/participants", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, display_name: displayName, password }),
+        body: JSON.stringify({ email, display_name: displayName, password }),
       });
       const json = await res.json();
 
@@ -33,9 +33,9 @@ export function ParticipantsAdmin({ initialParticipants }: { initialParticipants
 
       setParticipants((prev) => [...prev, json.participant as Participant]);
       setNotice(
-        `Listo. Compartile a ${displayName} → usuario "${json.participant.username}" y la clave que elegiste.`,
+        `Listo. Compartile a ${displayName} → su email (${json.participant.email}) y la clave que elegiste.`,
       );
-      setUsername("");
+      setEmail("");
       setDisplayName("");
       setPassword("");
     } catch {
@@ -57,11 +57,12 @@ export function ParticipantsAdmin({ initialParticipants }: { initialParticipants
       >
         <h2 className="font-display text-base font-bold text-ink">Nueva participante</h2>
         <div className="grid gap-3 sm:grid-cols-3">
-          <Field label="Usuario">
+          <Field label="Email">
             <input
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              placeholder="ej: vale_campeona"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="ej: vale@gmail.com"
               autoCapitalize="none"
               className="input"
               required
@@ -188,11 +189,25 @@ function ParticipantRow({
   return (
     <li className="rounded-3xl border border-line bg-white p-4 shadow-sm shadow-purple/5">
       <div className="flex items-center justify-between gap-3">
-        <div className="min-w-0">
-          <p className="truncate font-display text-base font-bold text-ink">
-            {participant.display_name} {participant.is_admin && <span className="text-xs font-semibold text-purple">· admin</span>}
-          </p>
-          <p className="text-xs text-ink/50">usuario: {participant.username}</p>
+        <div className="flex min-w-0 items-center gap-3">
+          {participant.avatar_url ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={participant.avatar_url}
+              alt=""
+              className="h-10 w-10 shrink-0 rounded-full object-cover"
+            />
+          ) : (
+            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-purple-light/30 text-base">
+              🙂
+            </span>
+          )}
+          <div className="min-w-0">
+            <p className="truncate font-display text-base font-bold text-ink">
+              {participant.display_name} {participant.is_admin && <span className="text-xs font-semibold text-purple">· admin</span>}
+            </p>
+            <p className="truncate text-xs text-ink/50">{participant.email}</p>
+          </div>
         </div>
         <button
           onClick={() => setEditing((v) => !v)}

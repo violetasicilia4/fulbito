@@ -2,23 +2,28 @@ import { NextResponse } from "next/server";
 import { createParticipantAccount } from "@/lib/create-participant";
 
 export async function POST(request: Request) {
-  let body: unknown;
+  let form: FormData;
   try {
-    body = await request.json();
+    form = await request.formData();
   } catch {
     return NextResponse.json({ error: "Solicitud inválida." }, { status: 400 });
   }
 
-  const { username, display_name, password } = (body ?? {}) as Record<string, unknown>;
+  const email = form.get("email");
+  const displayName = form.get("display_name");
+  const password = form.get("password");
+  const avatar = form.get("avatar");
 
-  if (typeof username !== "string" || typeof display_name !== "string" || typeof password !== "string") {
-    return NextResponse.json({ error: "Faltan datos: usuario, nombre visible y clave." }, { status: 400 });
+  if (typeof email !== "string" || typeof displayName !== "string" || typeof password !== "string") {
+    return NextResponse.json({ error: "Faltan datos: email, nombre visible y clave." }, { status: 400 });
   }
 
   const result = await createParticipantAccount({
-    username,
-    displayName: display_name,
+    email,
+    displayName,
     password,
+    avatarFile: avatar instanceof File ? avatar : null,
+    requireAvatar: true,
     isAdmin: false,
   });
 
