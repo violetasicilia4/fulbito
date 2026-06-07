@@ -1,18 +1,16 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f1f3ee;
-  --foreground: #181b16;
+  --background: #f8f3ea;
+  --foreground: #0b1957;
 
-  --color-prode-pink: #8ee559;
-  --color-prode-pink-dark: #5fae1f;
-  --color-prode-purple: #123319;
-  --color-prode-purple-light: #c3e6ad;
-  --color-prode-gold: #ffcf57;
-  --color-prode-mint: #d8f5c4;
-  --color-prode-cream: #f4f6f3;
-  --color-prode-ink: #123319;
-  --color-prode-line: #e6eae4;
+  --color-prode-pink: #9eccfa;
+  --color-prode-pink-dark: #3d6ea6;
+  --color-prode-purple: #0b1957;
+  --color-prode-purple-light: #d1e8ff;
+  --color-prode-cream: #f1ebdc;
+  --color-prode-ink: #0b1957;
+  --color-prode-line: #e8e1d2;
 }
 
 @theme inline {
@@ -22,8 +20,6 @@
   --color-pink-dark: var(--color-prode-pink-dark);
   --color-purple: var(--color-prode-purple);
   --color-purple-light: var(--color-prode-purple-light);
-  --color-gold: var(--color-prode-gold);
-  --color-mint: var(--color-prode-mint);
   --color-cream: var(--color-prode-cream);
   --color-ink: var(--color-prode-ink);
   --color-line: var(--color-prode-line);
@@ -54,7 +50,7 @@ body {
   background-color: #fff;
   border: 1px solid var(--color-prode-line);
   border-radius: 28px;
-  box-shadow: 0 8px 30px -12px rgba(18, 51, 25, 0.12);
+  box-shadow: 0 8px 30px -12px rgba(11, 25, 87, 0.1);
 }
 
 .score-input {
@@ -73,11 +69,11 @@ body {
 .score-input:focus {
   border-color: var(--color-prode-purple);
   background-color: #fff;
-  box-shadow: 0 0 0 4px rgba(142, 229, 89, 0.35);
+  box-shadow: 0 0 0 4px rgba(158, 204, 250, 0.45);
 }
 
 .score-input:disabled {
-  background-color: #f1f3ee;
+  background-color: var(--background);
   color: color-mix(in srgb, var(--color-prode-ink) 35%, transparent);
 }
 

@@ -81,7 +81,7 @@ export default function ReglasPage() {
                           : p.points === 3
                             ? "bg-pink/20 text-purple"
                             : p.points === 1
-                              ? "bg-gold/30 text-amber-900"
+                              ? "bg-purple-light text-purple/70"
                               : "bg-line text-ink/40"
                       }`}
                     >

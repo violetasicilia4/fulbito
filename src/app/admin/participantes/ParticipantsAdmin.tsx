@@ -89,7 +89,7 @@ export function ParticipantsAdmin({ initialParticipants }: { initialParticipants
           </Field>
         </div>
 
-        {error && <p className="rounded-2xl bg-pink/10 px-4 py-2.5 text-sm font-medium text-pink-dark">{error}</p>}
+        {error && <p className="rounded-2xl bg-rose-50 px-4 py-2.5 text-sm font-medium text-rose-600">{error}</p>}
         {notice && <p className="rounded-2xl bg-emerald-50 px-4 py-2.5 text-sm font-medium text-emerald-700">{notice}</p>}
 
         <button
@@ -235,7 +235,7 @@ function ParticipantRow({
             Es administradora
           </label>
 
-          {error && <p className="rounded-2xl bg-pink/10 px-3 py-2 text-sm font-medium text-pink-dark">{error}</p>}
+          {error && <p className="rounded-2xl bg-rose-50 px-3 py-2 text-sm font-medium text-rose-600">{error}</p>}
           {notice && <p className="rounded-2xl bg-emerald-50 px-3 py-2 text-sm font-medium text-emerald-700">{notice}</p>}
 
           <button

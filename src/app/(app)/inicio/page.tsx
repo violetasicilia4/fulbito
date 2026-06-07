@@ -63,9 +63,9 @@ export default async function InicioPage() {
         </span>
       </header>
 
-      <section className="relative overflow-hidden rounded-[28px] bg-purple p-5 text-white shadow-[0_16px_40px_-14px_rgba(18,51,25,0.45)]">
+      <section className="relative overflow-hidden rounded-[28px] bg-purple p-5 text-white shadow-[0_16px_40px_-14px_rgba(11,25,87,0.4)]">
         <div className="pointer-events-none absolute -top-12 -right-12 h-36 w-36 rounded-full bg-pink/10 blur-2xl" />
-        <div className="pointer-events-none absolute -bottom-12 -left-12 h-36 w-36 rounded-full bg-emerald-500/10 blur-2xl" />
+        <div className="pointer-events-none absolute -bottom-12 -left-12 h-36 w-36 rounded-full bg-purple-light/15 blur-2xl" />
 
         <div className="relative grid grid-cols-2 gap-3">
           <div>

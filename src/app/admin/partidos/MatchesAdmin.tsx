@@ -134,7 +134,7 @@ export function MatchesAdmin({ teams, initialMatches }: { teams: Team[]; initial
           </Field>
         </div>
 
-        {error && <p className="rounded-2xl bg-pink/10 px-4 py-2.5 text-sm font-medium text-pink-dark">{error}</p>}
+        {error && <p className="rounded-2xl bg-rose-50 px-4 py-2.5 text-sm font-medium text-rose-600">{error}</p>}
 
         <button
           type="submit"
@@ -290,7 +290,7 @@ function MatchRow({
             </Field>
           </div>
 
-          {error && <p className="rounded-2xl bg-pink/10 px-3 py-2 text-sm font-medium text-pink-dark">{error}</p>}
+          {error && <p className="rounded-2xl bg-rose-50 px-3 py-2 text-sm font-medium text-rose-600">{error}</p>}
 
           <button
             onClick={handleSave}

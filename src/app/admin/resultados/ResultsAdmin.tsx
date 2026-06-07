@@ -116,7 +116,7 @@ function ResultRow({ match, onUpdated }: { match: MatchWithTeams; onUpdated: (m:
         </p>
       </div>
 
-      {error && <p className="mt-2 text-sm font-medium text-pink-dark">{error}</p>}
+      {error && <p className="mt-2 text-sm font-medium text-rose-600">{error}</p>}
       {notice && <p className="mt-2 text-sm font-medium text-emerald-700">{notice}</p>}
 
       <button
