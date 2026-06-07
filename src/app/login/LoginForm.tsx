@@ -129,7 +129,7 @@ export function LoginForm() {
 
         <form
           onSubmit={handleSubmit}
-          className="space-y-4 rounded-3xl border border-line bg-white p-6 shadow-[0_8px_30px_-12px_rgba(255,79,147,0.35)]"
+          className="space-y-4 rounded-3xl border border-line bg-white p-6 shadow-[0_8px_30px_-12px_rgba(95,174,31,0.35)]"
         >
           <div className="grid grid-cols-2 gap-2 rounded-2xl bg-cream p-1">
             <button

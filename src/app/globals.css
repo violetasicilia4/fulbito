@@ -1,18 +1,18 @@
 @import "tailwindcss";
 
 :root {
-  --background: #fdf4f9;
-  --foreground: #2b1730;
+  --background: #f1f3ee;
+  --foreground: #181b16;
 
-  --color-prode-pink: #ff4f93;
-  --color-prode-pink-dark: #e23e7d;
-  --color-prode-purple: #6d28d9;
-  --color-prode-purple-light: #a78bfa;
-  --color-prode-gold: #ffb648;
-  --color-prode-mint: #2dd4bf;
-  --color-prode-cream: #fff7fb;
-  --color-prode-ink: #2b1730;
-  --color-prode-line: #f3d9e8;
+  --color-prode-pink: #8ae234;
+  --color-prode-pink-dark: #5fae1f;
+  --color-prode-purple: #1f2b1a;
+  --color-prode-purple-light: #c3e6ad;
+  --color-prode-gold: #ffcf57;
+  --color-prode-mint: #d8f5c4;
+  --color-prode-cream: #f7f9f4;
+  --color-prode-ink: #181b16;
+  --color-prode-line: #e2e6db;
 }
 
 @theme inline {
@@ -27,8 +27,8 @@
   --color-cream: var(--color-prode-cream);
   --color-ink: var(--color-prode-ink);
   --color-line: var(--color-prode-line);
-  --font-sans: var(--font-quicksand);
-  --font-display: var(--font-baloo);
+  --font-sans: var(--font-jakarta);
+  --font-display: var(--font-jakarta);
 }
 
 body {
@@ -39,9 +39,10 @@ body {
 
 .font-display {
   font-family: var(--font-display), var(--font-sans), sans-serif;
+  letter-spacing: -0.01em;
 }
 
 ::selection {
   background: var(--color-prode-pink);
-  color: white;
+  color: var(--color-prode-ink);
 }

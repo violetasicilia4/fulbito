@@ -133,10 +133,12 @@ recalcula los puntos de todas las participantes al instante.
 
 ## Diseño
 
-Mobile-first, con una paleta rosa/violeta cálida (definida en
-`src/app/globals.css` como tokens de Tailwind: `pink`, `purple`, `gold`,
-`mint`, `cream`, `ink`, `line`), tipografías redondeadas (`Quicksand` +
-`Baloo 2`), cards con bordes redondeados y sombras suaves, banderas con emoji
+Mobile-first, con una estética minimalista en verde lima sobre blanco/gris
+claro (definida en `src/app/globals.css` como tokens de Tailwind: `pink`,
+`purple`, `gold`, `mint`, `cream`, `ink`, `line` — los nombres se mantuvieron
+para no romper las clases existentes, pero ahora apuntan a la nueva paleta
+verde), tipografía geométrica limpia (`Plus Jakarta Sans`), cards con bordes
+redondeados y sombras suaves, banderas con emoji
 (sin depender de un CDN externo) y estados siempre visibles (pendiente /
 guardada / cerrada / puntos obtenidos / próximo / en juego / finalizado).
 

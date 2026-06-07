@@ -1,17 +1,11 @@
 import type { Metadata, Viewport } from "next";
-import { Quicksand, Baloo_2 } from "next/font/google";
+import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 
-const quicksand = Quicksand({
-  variable: "--font-quicksand",
+const jakarta = Plus_Jakarta_Sans({
+  variable: "--font-jakarta",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-});
-
-const baloo = Baloo_2({
-  variable: "--font-baloo",
-  subsets: ["latin"],
-  weight: ["500", "600", "700", "800"],
+  weight: ["400", "500", "600", "700", "800"],
 });
 
 export const metadata: Metadata = {
@@ -23,7 +17,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#ff4f93",
+  themeColor: "#8AE234",
 };
 
 export default function RootLayout({
@@ -34,7 +28,7 @@ export default function RootLayout({
   return (
     <html
       lang="es"
-      className={`${quicksand.variable} ${baloo.variable} h-full antialiased`}
+      className={`${jakarta.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-background text-foreground">
         {children}
