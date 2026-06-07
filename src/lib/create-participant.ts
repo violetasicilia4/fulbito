@@ -84,6 +84,7 @@ export async function createParticipantAccount({
       .upload(path, avatarFile, { contentType: avatarFile.type, upsert: true });
 
     if (uploadError) {
+      console.error("createParticipantAccount: avatar upload failed", uploadError);
       await admin.auth.admin.deleteUser(created.user.id);
       return { error: "No pudimos subir la foto de perfil. Probá de nuevo.", status: 500 };
     }
