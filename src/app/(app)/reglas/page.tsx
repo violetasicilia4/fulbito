@@ -2,9 +2,10 @@ const RULES = [
   "Cada participante carga sus predicciones antes de que empiece cada partido.",
   "Se pueden editar las predicciones hasta el horario de inicio del partido.",
   "Una vez que el partido empezó, la predicción queda cerrada y no se puede modificar.",
-  "Resultado exacto: sumás 3 puntos.",
-  "Adivinar el ganador o el empate (sin el resultado exacto): sumás 1 punto.",
-  "Errar el resultado y el ganador: sumás 0 puntos.",
+  "Resultado exacto: sumás 6 puntos.",
+  "Adivinar el ganador o el empate (sin el resultado exacto): sumás 3 puntos.",
+  "Acertar los goles de uno de los dos equipos (sin acertar el ganador): sumás 1 punto.",
+  "Errar todo: sumás 0 puntos.",
   "El ranking se actualiza automáticamente cuando se cargan los resultados reales.",
   "¡Gana quien tenga más puntos acumulados al final del campeonato!",
 ];
@@ -13,17 +14,19 @@ const EXAMPLES = [
   {
     real: "Argentina 2 – 1 Francia",
     predictions: [
-      { text: "Argentina 2 – 1 Francia", points: 3, detail: "resultado exacto" },
-      { text: "Argentina 1 – 0 Francia", points: 1, detail: "acertó que ganaba Argentina" },
-      { text: "Argentina 1 – 1 Francia", points: 0, detail: "no acertó ni resultado ni ganador" },
+      { text: "Argentina 2 – 1 Francia", points: 6, detail: "resultado exacto" },
+      { text: "Argentina 1 – 0 Francia", points: 3, detail: "acertó que ganaba Argentina" },
+      { text: "Argentina 0 – 1 Francia", points: 1, detail: "le pegó a los goles de Francia" },
+      { text: "Argentina 0 – 0 Francia", points: 0, detail: "no acertó nada" },
     ],
   },
   {
     real: "Argentina 1 – 1 Francia",
     predictions: [
-      { text: "Argentina 0 – 0 Francia", points: 1, detail: "acertó que era empate" },
-      { text: "Argentina 1 – 1 Francia", points: 3, detail: "resultado exacto" },
-      { text: "Argentina 2 – 1 Francia", points: 0, detail: "no era empate" },
+      { text: "Argentina 1 – 1 Francia", points: 6, detail: "resultado exacto" },
+      { text: "Argentina 0 – 0 Francia", points: 3, detail: "acertó que era empate" },
+      { text: "Argentina 1 – 0 Francia", points: 1, detail: "le pegó a los goles de Argentina" },
+      { text: "Argentina 2 – 0 Francia", points: 0, detail: "no acertó nada" },
     ],
   },
 ];
@@ -73,11 +76,13 @@ export default function ReglasPage() {
                     </span>
                     <span
                       className={`shrink-0 rounded-full px-2.5 py-1 text-[10px] font-black uppercase tracking-wider ${
-                        p.points === 3
+                        p.points === 6
                           ? "bg-purple text-pink"
-                          : p.points === 1
-                            ? "bg-gold/30 text-amber-900"
-                            : "bg-line text-ink/40"
+                          : p.points === 3
+                            ? "bg-pink/20 text-purple"
+                            : p.points === 1
+                              ? "bg-gold/30 text-amber-900"
+                              : "bg-line text-ink/40"
                       }`}
                     >
                       +{p.points} {p.points === 1 ? "punto" : "puntos"}

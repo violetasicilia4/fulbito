@@ -5,10 +5,11 @@ import { usePathname, useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 
 const ITEMS = [
+  { href: "/inicio", label: "Inicio" },
   { href: "/predicciones", label: "Mis predicciones" },
   { href: "/fixture", label: "Fixture" },
   { href: "/ranking", label: "Ranking" },
-  { href: "/reglas", label: "Reglas" },
+  { href: "/perfil", label: "Perfil" },
 ];
 
 export function TopBar({ displayName, isAdmin }: { displayName: string; isAdmin: boolean }) {
@@ -25,7 +26,7 @@ export function TopBar({ displayName, isAdmin }: { displayName: string; isAdmin:
   return (
     <header className="sticky top-0 z-20 border-b border-line bg-white/90 backdrop-blur supports-[backdrop-filter]:bg-white/75">
       <div className="mx-auto flex max-w-3xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
-        <Link href="/predicciones" className="flex items-center gap-2 font-display text-lg font-bold text-pink-dark">
+        <Link href="/inicio" className="flex items-center gap-2 font-display text-lg font-bold text-pink-dark">
           <span aria-hidden>⚽️</span>
           Prode 2026
         </Link>

@@ -63,7 +63,7 @@ export function LoginForm() {
       return;
     }
 
-    const redirectTo = searchParams.get("redirectTo") || "/predicciones";
+    const redirectTo = searchParams.get("redirectTo") || "/inicio";
     router.replace(redirectTo);
     router.refresh();
   }
@@ -110,7 +110,7 @@ export function LoginForm() {
         return;
       }
 
-      const redirectTo = searchParams.get("redirectTo") || "/predicciones";
+      const redirectTo = searchParams.get("redirectTo") || "/inicio";
       router.replace(redirectTo);
       router.refresh();
     } catch {

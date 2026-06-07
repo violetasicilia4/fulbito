@@ -43,7 +43,7 @@ export async function updateSession(request: NextRequest) {
   }
 
   if (user && pathname === "/login") {
-    return NextResponse.redirect(new URL("/predicciones", request.url));
+    return NextResponse.redirect(new URL("/inicio", request.url));
   }
 
   return response;

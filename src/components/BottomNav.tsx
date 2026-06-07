@@ -2,13 +2,14 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Sparkles, Calendar, Trophy, BookOpen } from "lucide-react";
+import { Home, Sparkles, Calendar, Trophy, UserRound } from "lucide-react";
 
 const ITEMS = [
+  { href: "/inicio", label: "Inicio", icon: Home },
   { href: "/predicciones", label: "Pronós", icon: Sparkles },
   { href: "/fixture", label: "Fixture", icon: Calendar },
   { href: "/ranking", label: "Ranking", icon: Trophy },
-  { href: "/reglas", label: "Reglas", icon: BookOpen },
+  { href: "/perfil", label: "Perfil", icon: UserRound },
 ];
 
 export function BottomNav() {

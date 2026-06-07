@@ -13,7 +13,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
   const participant = await getCurrentParticipant();
 
   if (!participant) redirect("/login");
-  if (!participant.is_admin) redirect("/predicciones");
+  if (!participant.is_admin) redirect("/inicio");
 
   return (
     <div className="min-h-svh bg-cream">
@@ -24,7 +24,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
             <p className="text-xs text-ink/50">Prode Mundial 2026 · {participant.display_name}</p>
           </div>
           <Link
-            href="/predicciones"
+            href="/inicio"
             className="rounded-full border border-line px-3 py-1.5 text-sm font-semibold text-ink/70 transition-colors hover:border-pink hover:text-pink-dark"
           >
             ← Volver al prode
