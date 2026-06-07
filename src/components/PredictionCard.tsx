@@ -119,9 +119,9 @@ export function PredictionCard({
   }
 
   return (
-    <li className="rounded-3xl border border-line bg-white p-4 shadow-sm shadow-pink/5 sm:p-5">
-      <div className="mb-3 flex items-center justify-between text-xs font-semibold uppercase tracking-wide text-ink/40">
-        <span>
+    <li className="premium-card p-4 sm:p-5">
+      <div className="mb-3 flex items-center justify-between">
+        <span className="eyebrow">
           {formatMatchDate(match.match_date)} · {formatMatchTime(match.match_date)} hs
         </span>
         <StatusPill tone={statusTone}>{statusLabel}</StatusPill>
@@ -137,7 +137,7 @@ export function PredictionCard({
             disabled={locked}
             label={`Goles de ${match.home_team?.name ?? "el equipo local"}`}
           />
-          <span className="font-display text-lg font-bold text-ink/30">–</span>
+          <span className="font-display text-lg font-bold text-ink/25">:</span>
           <ScoreInput
             value={away}
             onChange={handleScoreChange(setAway)}
@@ -150,7 +150,7 @@ export function PredictionCard({
       </div>
 
       {savedPrediction && (
-        <p className="mt-3 rounded-2xl bg-mint/40 px-3 py-2 text-center text-xs font-semibold text-ink/70">
+        <p className="mt-3 rounded-2xl bg-cream px-3 py-2 text-center text-xs font-semibold text-ink/70">
           {dirty
             ? `Tu predicción guardada es ${savedPrediction.predicted_home_score} – ${savedPrediction.predicted_away_score}. Cambiá los goles y volvé a guardar para actualizarla.`
             : `Guardaste tu predicción: ${match.home_team?.name ?? "Local"} ${savedPrediction.predicted_home_score} – ${savedPrediction.predicted_away_score} ${match.away_team?.name ?? "Visitante"}.`}
@@ -165,7 +165,7 @@ export function PredictionCard({
       )}
 
       {locked ? (
-        <p className="mt-3 rounded-2xl bg-zinc-100 px-3 py-2 text-center text-xs font-medium text-ink/60">
+        <p className="mt-3 rounded-2xl bg-cream px-3 py-2 text-center text-xs font-medium text-ink/60">
           {LOCKED_MESSAGE}
         </p>
       ) : (
@@ -174,7 +174,7 @@ export function PredictionCard({
             type="button"
             onClick={handleSave}
             disabled={saveState === "saving" || (!dirty && saveState !== "error")}
-            className="flex-1 rounded-2xl bg-pink px-4 py-2.5 text-sm font-bold text-white shadow-md shadow-pink/30 transition-transform active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50"
+            className="flex-1 rounded-full bg-purple px-4 py-2.5 text-sm font-black uppercase tracking-tight text-pink shadow-md shadow-purple/20 transition-transform active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50"
           >
             {saveState === "saving"
               ? "Guardando…"
@@ -183,13 +183,13 @@ export function PredictionCard({
                 : "Guardar predicción"}
           </button>
           {saveState === "saved" && !dirty && (
-            <span className="text-sm font-semibold text-emerald-600">✓ Guardada</span>
+            <span className="text-sm font-semibold text-pink-dark">✓ Guardada</span>
           )}
         </div>
       )}
 
       {errorMessage && (
-        <p className="mt-2 text-sm font-medium text-pink-dark" role="alert">
+        <p className="mt-2 text-sm font-medium text-rose-600" role="alert">
           {errorMessage}
         </p>
       )}
@@ -220,7 +220,7 @@ function ScoreInput({
       disabled={disabled}
       aria-label={label}
       placeholder="-"
-      className="h-12 w-12 rounded-2xl border border-line bg-cream text-center text-lg font-bold text-ink outline-none transition-colors focus:border-pink focus:ring-2 focus:ring-pink/30 disabled:cursor-not-allowed disabled:bg-zinc-100 disabled:text-ink/40"
+      className="score-input text-lg disabled:cursor-not-allowed"
     />
   );
 }

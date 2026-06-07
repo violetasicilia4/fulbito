@@ -133,30 +133,35 @@ export function LoginForm() {
   }
 
   return (
-    <main className="flex flex-1 flex-col items-center justify-center bg-gradient-to-b from-pink/10 via-background to-background px-4 py-10">
-      <div className="w-full max-w-sm">
-        <div className="mb-8 text-center">
-          <div className="mx-auto mb-3 flex h-16 w-16 items-center justify-center rounded-3xl bg-pink/15 text-3xl">
-            ⚽️🏆
+    <main className="relative flex flex-1 flex-col items-center justify-center overflow-hidden bg-pink px-4 py-10">
+      <div className="pointer-events-none absolute -top-16 -right-16 h-64 w-64 rounded-full bg-white/20 blur-3xl" />
+      <div className="pointer-events-none absolute -bottom-20 -left-16 h-64 w-64 rounded-full bg-purple/10 blur-3xl" />
+
+      <div className="relative w-full max-w-sm">
+        <div className="mb-7">
+          <div className="mb-4 flex h-9 w-9 items-center justify-center rounded-2xl bg-purple text-lg">
+            🏆
           </div>
-          <h1 className="font-display text-3xl font-bold text-pink-dark">
-            Prode Mundial 2026
+          <h1 className="font-display text-4xl font-black leading-[1.05] tracking-tight text-purple">
+            Predecí el
+            <br />
+            Mundial
+            <br />
+            sin esfuerzo
           </h1>
-          <p className="mt-2 text-sm leading-relaxed text-ink/70">
-            Cargá tus predicciones del Mundial 2026 y competí con el grupo.
+          <p className="mt-3 max-w-[280px] text-[13px] font-medium leading-relaxed text-purple/80">
+            Cargá tus predicciones del Mundial 2026, competí con tus amigas y seguí el
+            ranking en una app pensada para el grupo.
           </p>
         </div>
 
-        <form
-          onSubmit={handleSubmit}
-          className="space-y-4 rounded-3xl border border-line bg-white p-6 shadow-[0_8px_30px_-12px_rgba(95,174,31,0.35)]"
-        >
-          <div className="grid grid-cols-2 gap-2 rounded-2xl bg-cream p-1">
+        <form onSubmit={handleSubmit} className="space-y-3.5">
+          <div className="grid grid-cols-2 gap-1.5 rounded-full bg-white/40 p-1 backdrop-blur-sm">
             <button
               type="button"
               onClick={() => switchMode("login")}
-              className={`rounded-xl px-3 py-2 text-sm font-bold transition-colors ${
-                mode === "login" ? "bg-white text-pink-dark shadow-sm" : "text-ink/50"
+              className={`rounded-full px-3 py-2 text-sm font-bold transition-colors ${
+                mode === "login" ? "bg-purple text-pink shadow-sm" : "text-purple/60"
               }`}
             >
               Ingresar
@@ -164,8 +169,8 @@ export function LoginForm() {
             <button
               type="button"
               onClick={() => switchMode("signup")}
-              className={`rounded-xl px-3 py-2 text-sm font-bold transition-colors ${
-                mode === "signup" ? "bg-white text-pink-dark shadow-sm" : "text-ink/50"
+              className={`rounded-full px-3 py-2 text-sm font-bold transition-colors ${
+                mode === "signup" ? "bg-purple text-pink shadow-sm" : "text-purple/60"
               }`}
             >
               Crear cuenta
@@ -173,11 +178,11 @@ export function LoginForm() {
           </div>
 
           {mode === "signup" && (
-            <div className="flex flex-col items-center gap-2">
+            <div className="flex flex-col items-center gap-2 pt-1">
               <button
                 type="button"
                 onClick={() => fileInputRef.current?.click()}
-                className="group relative flex h-20 w-20 items-center justify-center overflow-hidden rounded-full border-2 border-dashed border-line bg-cream text-2xl text-ink/30 transition-colors hover:border-pink"
+                className="group relative flex h-20 w-20 items-center justify-center overflow-hidden rounded-full border-2 border-dashed border-purple/30 bg-white/60 text-2xl text-purple/40 shadow-[0_4px_20px_rgba(0,0,0,0.04)] transition-colors hover:border-purple"
                 aria-label="Subir foto de perfil"
               >
                 {avatarPreview ? (
@@ -194,16 +199,13 @@ export function LoginForm() {
                 onChange={handleAvatarChange}
                 className="hidden"
               />
-              <p className="text-xs font-medium text-ink/50">
+              <p className="text-xs font-semibold text-purple/70">
                 {avatarFile ? "Foto lista. Tocá para cambiarla." : "Subí tu foto de perfil (obligatoria)"}
               </p>
             </div>
           )}
 
-          <div>
-            <label htmlFor="email" className="mb-1 block text-sm font-semibold text-ink">
-              Email
-            </label>
+          <Field label="Email">
             <input
               id="email"
               name="email"
@@ -213,15 +215,12 @@ export function LoginForm() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="ej: vale@gmail.com"
-              className="w-full rounded-2xl border border-line bg-cream px-4 py-3 text-base text-ink outline-none transition-colors focus:border-pink focus:ring-2 focus:ring-pink/30"
+              className="loginInput"
             />
-          </div>
+          </Field>
 
           {mode === "signup" && (
-            <div>
-              <label htmlFor="displayName" className="mb-1 block text-sm font-semibold text-ink">
-                Nombre visible
-              </label>
+            <Field label="Nombre visible">
               <input
                 id="displayName"
                 name="displayName"
@@ -230,15 +229,12 @@ export function LoginForm() {
                 value={displayName}
                 onChange={(e) => setDisplayName(e.target.value)}
                 placeholder="ej: Valen"
-                className="w-full rounded-2xl border border-line bg-cream px-4 py-3 text-base text-ink outline-none transition-colors focus:border-pink focus:ring-2 focus:ring-pink/30"
+                className="loginInput"
               />
-            </div>
+            </Field>
           )}
 
-          <div>
-            <label htmlFor="password" className="mb-1 block text-sm font-semibold text-ink">
-              Clave
-            </label>
+          <Field label="Clave">
             <input
               id="password"
               name="password"
@@ -247,15 +243,12 @@ export function LoginForm() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder={mode === "login" ? "Ingresá tu clave" : "Elegí una clave (mín. 6 caracteres)"}
-              className="w-full rounded-2xl border border-line bg-cream px-4 py-3 text-base text-ink outline-none transition-colors focus:border-pink focus:ring-2 focus:ring-pink/30"
+              className="loginInput"
             />
-          </div>
+          </Field>
 
           {mode === "signup" && (
-            <div>
-              <label htmlFor="confirmPassword" className="mb-1 block text-sm font-semibold text-ink">
-                Repetí la clave
-              </label>
+            <Field label="Repetí la clave">
               <input
                 id="confirmPassword"
                 name="confirmPassword"
@@ -264,21 +257,24 @@ export function LoginForm() {
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 placeholder="Volvé a escribirla"
-                className="w-full rounded-2xl border border-line bg-cream px-4 py-3 text-base text-ink outline-none transition-colors focus:border-pink focus:ring-2 focus:ring-pink/30"
+                className="loginInput"
               />
-            </div>
+            </Field>
           )}
 
           {error && (
-            <p className="rounded-2xl bg-pink/10 px-4 py-3 text-sm font-medium text-pink-dark" role="alert">
-              {error}
+            <p
+              className="rounded-2xl border border-white/50 bg-white/40 px-4 py-2.5 text-center text-xs font-bold text-purple backdrop-blur-sm"
+              role="alert"
+            >
+              ⚠️ {error}
             </p>
           )}
 
           <button
             type="submit"
             disabled={loading}
-            className="flex w-full items-center justify-center gap-2 rounded-2xl bg-pink px-4 py-3 text-base font-bold text-white shadow-lg shadow-pink/30 transition-transform active:scale-[0.98] disabled:opacity-60"
+            className="flex w-full items-center justify-center gap-2 rounded-full bg-purple px-4 py-3.5 text-sm font-black text-pink shadow-[0_10px_25px_rgba(18,51,25,0.25)] transition-all duration-150 active:scale-[0.98] disabled:opacity-60"
           >
             {loading
               ? mode === "login"
@@ -289,18 +285,18 @@ export function LoginForm() {
                 : "Crear cuenta"}
           </button>
 
-          <p className="text-center text-xs text-ink/50">
+          <p className="text-center text-xs font-semibold text-purple/70">
             {mode === "login" ? (
               <>
                 ¿No tenés cuenta todavía?{" "}
-                <button type="button" onClick={() => switchMode("signup")} className="font-semibold text-pink-dark underline">
+                <button type="button" onClick={() => switchMode("signup")} className="font-black text-purple underline">
                   Creá la tuya
                 </button>
               </>
             ) : (
               <>
                 ¿Ya tenés cuenta?{" "}
-                <button type="button" onClick={() => switchMode("login")} className="font-semibold text-pink-dark underline">
+                <button type="button" onClick={() => switchMode("login")} className="font-black text-purple underline">
                   Ingresá acá
                 </button>
               </>
@@ -308,6 +304,39 @@ export function LoginForm() {
           </p>
         </form>
       </div>
+
+      <style jsx global>{`
+        .loginInput {
+          width: 100%;
+          height: 2.75rem;
+          border-radius: 9999px;
+          border: none;
+          background-color: rgba(255, 255, 255, 0.55);
+          padding: 0 1.15rem;
+          font-size: 0.875rem;
+          font-weight: 600;
+          color: var(--color-prode-purple);
+          outline: none;
+          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+          transition: all 0.15s ease;
+        }
+        .loginInput::placeholder {
+          color: color-mix(in srgb, var(--color-prode-purple) 38%, transparent);
+        }
+        .loginInput:focus {
+          background-color: #fff;
+          box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-prode-purple) 25%, transparent);
+        }
+      `}</style>
     </main>
+  );
+}
+
+function Field({ label, children }: { label: string; children: React.ReactNode }) {
+  return (
+    <label className="block">
+      <span className="mb-1.5 block pl-1 text-[10px] font-black uppercase tracking-wider text-purple/70">{label}</span>
+      {children}
+    </label>
   );
 }

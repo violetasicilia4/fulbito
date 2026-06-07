@@ -4,15 +4,15 @@
   --background: #f1f3ee;
   --foreground: #181b16;
 
-  --color-prode-pink: #8ae234;
+  --color-prode-pink: #8ee559;
   --color-prode-pink-dark: #5fae1f;
-  --color-prode-purple: #1f2b1a;
+  --color-prode-purple: #123319;
   --color-prode-purple-light: #c3e6ad;
   --color-prode-gold: #ffcf57;
   --color-prode-mint: #d8f5c4;
-  --color-prode-cream: #f7f9f4;
-  --color-prode-ink: #181b16;
-  --color-prode-line: #e2e6db;
+  --color-prode-cream: #f4f6f3;
+  --color-prode-ink: #123319;
+  --color-prode-line: #e6eae4;
 }
 
 @theme inline {
@@ -40,6 +40,45 @@ body {
 .font-display {
   font-family: var(--font-display), var(--font-sans), sans-serif;
   letter-spacing: -0.01em;
+}
+
+.eyebrow {
+  font-size: 0.625rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--color-prode-ink) 55%, transparent);
+}
+
+.premium-card {
+  background-color: #fff;
+  border: 1px solid var(--color-prode-line);
+  border-radius: 28px;
+  box-shadow: 0 8px 30px -12px rgba(18, 51, 25, 0.12);
+}
+
+.score-input {
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 1rem;
+  border: 1.5px solid var(--color-prode-line);
+  background-color: var(--color-prode-cream);
+  text-align: center;
+  font-weight: 800;
+  color: var(--color-prode-ink);
+  outline: none;
+  transition: all 0.15s ease;
+}
+
+.score-input:focus {
+  border-color: var(--color-prode-purple);
+  background-color: #fff;
+  box-shadow: 0 0 0 4px rgba(142, 229, 89, 0.35);
+}
+
+.score-input:disabled {
+  background-color: #f1f3ee;
+  color: color-mix(in srgb, var(--color-prode-ink) 35%, transparent);
 }
 
 ::selection {

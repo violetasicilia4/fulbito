@@ -1,11 +1,11 @@
 const STYLES: Record<string, string> = {
-  pendiente: "bg-amber-100 text-amber-700",
-  guardada: "bg-emerald-100 text-emerald-700",
-  cerrada: "bg-zinc-200 text-zinc-600",
-  proximo: "bg-purple-light/30 text-purple",
-  "en juego": "bg-pink/15 text-pink-dark",
-  finalizado: "bg-zinc-200 text-zinc-600",
-  puntos: "bg-gold/20 text-amber-800",
+  pendiente: "bg-cream text-ink/50 border border-line",
+  guardada: "bg-purple text-pink border border-purple",
+  cerrada: "bg-cream text-ink/40 border border-line",
+  proximo: "bg-pink/15 text-purple border border-pink/30",
+  "en juego": "bg-amber-100 text-amber-800 border border-amber-200 animate-pulse",
+  finalizado: "bg-cream text-ink/40 border border-line",
+  puntos: "bg-pink text-purple border border-pink-dark/30",
 };
 
 export function StatusPill({
@@ -18,7 +18,7 @@ export function StatusPill({
   const cls = STYLES[tone] ?? STYLES.pendiente;
   return (
     <span
-      className={`inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-semibold ${cls}`}
+      className={`inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-[10px] font-black uppercase tracking-wider ${cls}`}
     >
       {children}
     </span>
