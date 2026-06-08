@@ -20,7 +20,7 @@ export default async function FixturePage() {
     .eq("phase", "group")
     .order("match_date", { ascending: true });
 
-  const groups = groupByGroupName((matches ?? []) as unknown as MatchWithTeams[]);
+  const days = groupByDate((matches ?? []) as unknown as MatchWithTeams[]);
 
   return (
     <div className="space-y-6">
@@ -28,34 +28,33 @@ export default async function FixturePage() {
         <span className="eyebrow">Fixture &amp; calendario</span>
         <h1 className="font-display text-2xl font-bold tracking-tight text-ink sm:text-3xl">Fixture oficial</h1>
         <p className="mt-1 text-sm leading-relaxed text-ink/60">
-          Fase de grupos del Mundial 2026. Acá vas a ver fechas, horarios y resultados a
-          medida que se vayan jugando los partidos.
+          Fase de grupos del Mundial 2026.
         </p>
       </header>
 
-      {groups.length === 0 && (
+      {days.length === 0 && (
         <p className="premium-card p-6 text-center text-sm text-ink/60">
           El fixture todavía no está cargado. ¡Vuelve pronto! 📅
         </p>
       )}
 
-      {groups.map(([groupName, groupMatches]) => (
-        <section key={groupName}>
-          <h2 className="mb-3 inline-flex items-center gap-2 font-display text-lg font-bold tracking-tight text-purple">
-            <span className="flex h-7 w-7 items-center justify-center rounded-full bg-pink/20 text-sm font-black text-purple">
-              {groupName}
+      {days.map(([dateLabel, dayMatches]) => (
+        <section key={dateLabel}>
+          <h2 className="mb-3 inline-flex items-center gap-2 font-display text-lg font-bold capitalize tracking-tight text-purple">
+            <span className="flex h-7 w-7 items-center justify-center rounded-full bg-pink/20 text-sm">
+              📅
             </span>
-            Grupo {groupName}
+            {dateLabel}
           </h2>
           <ul className="space-y-3">
-            {groupMatches.map((match) => {
+            {dayMatches.map((match) => {
               const status = STATUS_LABEL[match.status] ?? STATUS_LABEL.scheduled;
               const played = match.home_score !== null && match.away_score !== null;
               return (
                 <li key={match.id} className="premium-card p-4 sm:p-5">
                   <div className="mb-3 flex items-center justify-between">
                     <span className="eyebrow">
-                      {formatMatchDate(match.match_date)} · {formatMatchTime(match.match_date)} hs
+                      Grupo {match.group_name} · {formatMatchTime(match.match_date)} hs
                     </span>
                     <StatusPill tone={status.tone}>{status.label}</StatusPill>
                   </div>
@@ -77,12 +76,12 @@ export default async function FixturePage() {
   );
 }
 
-function groupByGroupName(matches: MatchWithTeams[]): [string, MatchWithTeams[]][] {
+function groupByDate(matches: MatchWithTeams[]): [string, MatchWithTeams[]][] {
   const map = new Map<string, MatchWithTeams[]>();
   for (const match of matches) {
-    const key = match.group_name ?? "Sin grupo";
+    const key = formatMatchDate(match.match_date);
     if (!map.has(key)) map.set(key, []);
     map.get(key)!.push(match);
   }
-  return Array.from(map.entries()).sort(([a], [b]) => a.localeCompare(b));
+  return Array.from(map.entries());
 }
