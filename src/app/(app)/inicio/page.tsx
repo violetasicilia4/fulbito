@@ -45,17 +45,15 @@ export default async function InicioPage() {
   const [featured, ...rest] = upcoming;
   const otherPending = rest.slice(0, 4);
 
-  const firstName = (participant?.display_name ?? "").trim().split(/\s+/)[0] || "Hola";
-
   return (
     <div className="space-y-6">
       <header className="flex items-start justify-between gap-3">
         <div>
           <span className="eyebrow">Mundial 2026</span>
           <h1 className="font-display text-2xl font-bold tracking-tight text-ink sm:text-3xl">
-            Hola, {firstName} 👋
+            Inicio
           </h1>
-          <p className="mt-1 text-sm leading-relaxed text-ink/60">¡Bienvenido de vuelta!</p>
+          <p className="mt-1 text-sm leading-relaxed text-ink/60">¡Bienvenida de vuelta!</p>
         </div>
         <span className="relative mt-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-line bg-white text-ink/60 shadow-[0_4px_20px_rgba(0,0,0,0.03)]">
           <Bell className="h-4 w-4" strokeWidth={2} />

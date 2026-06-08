@@ -26,10 +26,6 @@ export default async function RankingPage() {
       <header>
         <span className="eyebrow">General · Mundial 2026</span>
         <h1 className="font-display text-2xl font-bold tracking-tight text-ink sm:text-3xl">Ranking</h1>
-        <p className="mt-1 text-sm leading-relaxed text-ink/60">
-          Se ordena automáticamente por puntos totales. Resultado exacto = 3 puntos,
-          acertar ganador o empate = 1 punto.
-        </p>
       </header>
 
       {me && (
