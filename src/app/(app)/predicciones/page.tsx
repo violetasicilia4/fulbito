@@ -33,11 +33,8 @@ export default async function PrediccionesPage() {
         <span className="eyebrow">Pronósticos oficiales</span>
         <h1 className="font-display text-2xl font-bold tracking-tight text-ink sm:text-3xl">Mis predicciones</h1>
         <p className="mt-1 text-sm leading-relaxed text-ink/60">
-          Cargá el resultado que imaginás para cada partido de la fase de grupos. Probá el{" "}
-          <strong className="font-bold text-purple">modo rápido</strong>: deslizá cada tarjeta a la
-          derecha para enviar tu pronóstico o a la izquierda para dejarlo para más tarde — como en
-          una app de citas, pero con fútbol. Podés editarlas hasta el horario en que arranca cada
-          partido.
+          Cargá el resultado que imaginás para cada partido de la fase de grupos. Podés editarlas
+          hasta el horario en que arranca cada partido.
         </p>
         <div className="mt-3 inline-flex items-center gap-2 rounded-full bg-purple px-3 py-1.5 text-xs font-black uppercase tracking-tight text-pink">
           ✏️ {totalPredicted} de {totalMatches} partidos con predicción cargada
