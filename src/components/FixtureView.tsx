@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { CalendarDays, History } from "lucide-react";
 import { TeamBadge } from "@/components/TeamBadge";
 import { StatusPill } from "@/components/StatusPill";
 import { formatMatchTime } from "@/lib/format";
@@ -28,26 +29,28 @@ export function FixtureView({
     <div className="space-y-4">
       <div className="inline-flex w-full gap-1 rounded-full bg-cream p-1 sm:w-auto">
         <TabButton active={tab === "proximos"} onClick={() => setTab("proximos")}>
-          📅 Próximos partidos
+          <CalendarDays className="h-3.5 w-3.5" strokeWidth={2.6} />
+          Próximos partidos
         </TabButton>
         <TabButton active={tab === "pasados"} onClick={() => setTab("pasados")}>
-          🏁 Partidos pasados
+          <History className="h-3.5 w-3.5" strokeWidth={2.6} />
+          Partidos pasados
         </TabButton>
       </div>
 
       {days.length === 0 && (
         <p className="premium-card p-5 text-center text-sm text-ink/60">
           {tab === "proximos"
-            ? "No hay partidos próximos por el momento. ⚽️"
-            : "Todavía no se jugó ningún partido. ⚽️"}
+            ? "No hay partidos próximos por el momento."
+            : "Todavía no se jugó ningún partido."}
         </p>
       )}
 
       {days.map(([dateLabel, dayMatches]) => (
         <section key={dateLabel}>
           <h2 className="mb-2 inline-flex items-center gap-2 font-display text-base font-bold capitalize tracking-tight text-purple">
-            <span className="flex h-6 w-6 items-center justify-center rounded-full bg-pink/20 text-xs">
-              📅
+            <span className="flex h-6 w-6 items-center justify-center rounded-full bg-pink/20 text-purple">
+              <CalendarDays className="h-3 w-3" strokeWidth={2.6} />
             </span>
             {dateLabel}
           </h2>
@@ -98,7 +101,7 @@ function TabButton({
     <button
       type="button"
       onClick={onClick}
-      className={`flex-1 rounded-full px-4 py-2 text-xs font-black uppercase tracking-tight transition-colors sm:flex-none ${
+      className={`flex flex-1 items-center justify-center gap-1.5 rounded-full px-4 py-2 text-xs font-black uppercase tracking-tight transition-colors sm:flex-none ${
         active ? "bg-purple text-pink shadow-sm" : "text-ink/40 hover:text-ink/60"
       }`}
     >

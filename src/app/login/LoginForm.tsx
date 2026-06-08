@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState, type FormEvent } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import { AlertCircle, Camera, Trophy } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 
 type Mode = "login" | "signup";
@@ -139,8 +140,8 @@ export function LoginForm() {
 
       <div className="relative w-full max-w-sm">
         <div className="mb-5">
-          <div className="mb-3 flex h-8 w-8 items-center justify-center rounded-xl bg-purple text-base">
-            🏆
+          <div className="mb-3 flex h-8 w-8 items-center justify-center rounded-xl bg-purple text-pink">
+            <Trophy className="h-4 w-4" strokeWidth={2.4} />
           </div>
           <h1 className="font-display text-[1.75rem] font-black leading-[1.1] tracking-tight text-purple">
             Predecí el Mundial sin esfuerzo
@@ -184,7 +185,7 @@ export function LoginForm() {
                   // eslint-disable-next-line @next/next/no-img-element
                   <img src={avatarPreview} alt="" className="h-full w-full object-cover" />
                 ) : (
-                  <span aria-hidden>📷</span>
+                  <Camera className="h-6 w-6" strokeWidth={1.8} aria-hidden />
                 )}
               </button>
               <input
@@ -259,10 +260,11 @@ export function LoginForm() {
 
           {error && (
             <p
-              className="rounded-2xl border border-white/50 bg-white/40 px-4 py-2.5 text-center text-xs font-bold text-purple backdrop-blur-sm"
+              className="flex items-center justify-center gap-1.5 rounded-2xl border border-white/50 bg-white/40 px-4 py-2.5 text-center text-xs font-bold text-purple backdrop-blur-sm"
               role="alert"
             >
-              ⚠️ {error}
+              <AlertCircle className="h-3.5 w-3.5 shrink-0" strokeWidth={2.4} />
+              {error}
             </p>
           )}
 

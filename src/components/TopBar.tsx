@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { Trophy } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 
@@ -27,7 +28,9 @@ export function TopBar({ isAdmin }: { isAdmin: boolean }) {
     <header className="sticky top-0 z-20 border-b border-line bg-white/90 backdrop-blur supports-[backdrop-filter]:bg-white/75">
       <div className="mx-auto flex max-w-3xl items-center justify-between gap-4 px-4 py-2.5 sm:px-6">
         <Link href="/inicio" className="flex items-center gap-2 font-display text-lg font-bold text-pink-dark">
-          <span aria-hidden>⚽️</span>
+          <span className="flex h-7 w-7 items-center justify-center rounded-full bg-purple text-pink" aria-hidden>
+            <Trophy className="h-3.5 w-3.5" strokeWidth={2.4} />
+          </span>
           Prode 2026
         </Link>
 

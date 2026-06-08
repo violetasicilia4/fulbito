@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Zap, ListChecks } from "lucide-react";
 import { PredictionCard } from "@/components/PredictionCard";
 import { SwipePredictions } from "@/components/SwipePredictions";
 import type { MatchWithTeams, Prediction } from "@/lib/supabase/types";
@@ -23,10 +24,12 @@ export function PredictionsView({
     <div className="space-y-3.5">
       <div className="inline-flex w-full gap-1 rounded-full bg-cream p-1 sm:w-auto">
         <ModeButton active={mode === "swipe"} onClick={() => setMode("swipe")}>
-          🔥 Modo rápido
+          <Zap className="h-3.5 w-3.5" strokeWidth={2.6} />
+          Modo rápido
         </ModeButton>
         <ModeButton active={mode === "list"} onClick={() => setMode("list")}>
-          📋 Lista completa
+          <ListChecks className="h-3.5 w-3.5" strokeWidth={2.6} />
+          Lista completa
         </ModeButton>
       </div>
 
@@ -37,7 +40,7 @@ export function PredictionsView({
           {groups.length === 0 && (
             <p className="premium-card p-5 text-center text-sm text-ink/60">
               Todavía no hay partidos cargados. Cuando la organizadora publique el fixture vas a
-              poder cargar tus predicciones acá. ⚽️
+              poder cargar tus predicciones acá.
             </p>
           )}
 
@@ -75,7 +78,7 @@ function ModeButton({
     <button
       type="button"
       onClick={onClick}
-      className={`flex-1 rounded-full px-4 py-2 text-xs font-black uppercase tracking-tight transition-colors sm:flex-none ${
+      className={`flex flex-1 items-center justify-center gap-1.5 rounded-full px-4 py-2 text-xs font-black uppercase tracking-tight transition-colors sm:flex-none ${
         active ? "bg-purple text-pink shadow-sm" : "text-ink/40 hover:text-ink/60"
       }`}
     >

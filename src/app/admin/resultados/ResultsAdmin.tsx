@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { formatMatchDate, formatMatchTime } from "@/lib/format";
 import { StatusPill } from "@/components/StatusPill";
+import { FlagImage } from "@/components/FlagImage";
 import type { MatchWithTeams } from "@/lib/supabase/types";
 
 const STATUS_LABEL: Record<string, { label: string; tone: string }> = {
@@ -89,8 +90,9 @@ function ResultRow({ match, onUpdated }: { match: MatchWithTeams; onUpdated: (m:
       </div>
 
       <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-3">
-        <p className="truncate text-sm font-semibold text-ink">
-          {match.home_team?.flag_emoji} {match.home_team?.name}
+        <p className="flex min-w-0 items-center gap-2 truncate text-sm font-semibold text-ink">
+          <FlagImage team={match.home_team} size="sm" />
+          <span className="truncate">{match.home_team?.name}</span>
         </p>
         <div className="flex items-center gap-2">
           <input
@@ -111,8 +113,9 @@ function ResultRow({ match, onUpdated }: { match: MatchWithTeams; onUpdated: (m:
             className="h-11 w-14 rounded-2xl border border-line bg-cream text-center text-base font-bold text-ink outline-none focus:border-purple focus:ring-2 focus:ring-purple/20"
           />
         </div>
-        <p className="truncate text-right text-sm font-semibold text-ink">
-          {match.away_team?.name} {match.away_team?.flag_emoji}
+        <p className="flex min-w-0 items-center justify-end gap-2 truncate text-right text-sm font-semibold text-ink">
+          <span className="truncate">{match.away_team?.name}</span>
+          <FlagImage team={match.away_team} size="sm" />
         </p>
       </div>
 

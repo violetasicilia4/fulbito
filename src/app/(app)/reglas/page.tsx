@@ -35,7 +35,7 @@ export default function ReglasPage() {
         <span className="eyebrow">Cómo se juega</span>
         <h1 className="font-display text-2xl font-bold tracking-tight text-ink sm:text-3xl">Reglas del juego</h1>
         <p className="mt-1 text-sm leading-relaxed text-ink/60">
-          Simple, claro y sin vueltas: así se juega el prode. 🎉
+          Simple, claro y sin vueltas: así se juega el prode.
         </p>
       </header>
 
@@ -59,7 +59,7 @@ export default function ReglasPage() {
           {EXAMPLES.map((example) => (
             <div key={example.real} className="premium-card p-5">
               <p className="mb-3 inline-flex items-center gap-2 rounded-full bg-purple px-3 py-1.5 text-sm font-bold text-pink">
-                ⚽️ Resultado real: {example.real}
+                Resultado real: {example.real}
               </p>
               <ul className="space-y-2">
                 {example.predictions.map((p) => (

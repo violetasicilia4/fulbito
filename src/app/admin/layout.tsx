@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ChevronLeft } from "lucide-react";
 import { redirect } from "next/navigation";
 import { getCurrentParticipant } from "@/lib/auth";
 
@@ -25,9 +26,10 @@ export default async function AdminLayout({ children }: { children: React.ReactN
           </div>
           <Link
             href="/inicio"
-            className="rounded-full border border-line px-3 py-1.5 text-sm font-semibold text-ink/70 transition-colors hover:border-pink hover:text-pink-dark"
+            className="inline-flex items-center gap-1 rounded-full border border-line px-3 py-1.5 text-sm font-semibold text-ink/70 transition-colors hover:border-pink hover:text-pink-dark"
           >
-            ← Volver al prode
+            <ChevronLeft className="h-4 w-4" strokeWidth={2.4} />
+            Volver al prode
           </Link>
         </div>
         <nav className="mx-auto flex max-w-4xl gap-1 overflow-x-auto px-4 pb-3 sm:px-6">

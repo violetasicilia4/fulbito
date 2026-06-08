@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { ChevronDown, Share2 } from "lucide-react";
+import { ChevronDown, ChevronRight, Share2 } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 
 const POINTS_INFO = [
@@ -49,9 +49,10 @@ export function HowToScoreSection() {
           ))}
           <Link
             href="/reglas"
-            className="block rounded-2xl bg-purple px-3 py-2.5 text-center text-[11px] font-black uppercase tracking-wider text-pink transition-opacity hover:opacity-90"
+            className="flex items-center justify-center gap-1 rounded-2xl bg-purple px-3 py-2.5 text-center text-[11px] font-black uppercase tracking-wider text-pink transition-opacity hover:opacity-90"
           >
-            Ver reglas y ejemplos completos →
+            Ver reglas y ejemplos completos
+            <ChevronRight className="h-3.5 w-3.5" strokeWidth={2.6} />
           </Link>
         </ul>
       )}
@@ -65,7 +66,7 @@ export function ShareInviteButton() {
   async function handleShare() {
     const shareData = {
       title: "Prode Mundial 2026",
-      text: "Sumate a competir conmigo en el prode del Mundial 2026 🏆⚽️",
+      text: "Sumate a competir conmigo en el prode del Mundial 2026.",
       url: typeof window !== "undefined" ? window.location.origin : "",
     };
 

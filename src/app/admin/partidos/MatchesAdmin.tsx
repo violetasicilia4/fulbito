@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { formatMatchDate, formatMatchTime } from "@/lib/format";
+import { FlagImage } from "@/components/FlagImage";
 import type { MatchWithTeams, Team } from "@/lib/supabase/types";
 
 const PHASES = [
@@ -109,7 +110,7 @@ export function MatchesAdmin({ teams, initialMatches }: { teams: Team[]; initial
               <option value="">Elegir equipo…</option>
               {teams.map((t) => (
                 <option key={t.id} value={t.id}>
-                  {t.flag_emoji} {t.name} {t.group_name ? `(Grupo ${t.group_name})` : ""}
+                  {t.name} {t.group_name ? `(Grupo ${t.group_name})` : ""}
                 </option>
               ))}
             </select>
@@ -119,7 +120,7 @@ export function MatchesAdmin({ teams, initialMatches }: { teams: Team[]; initial
               <option value="">Elegir equipo…</option>
               {teams.map((t) => (
                 <option key={t.id} value={t.id}>
-                  {t.flag_emoji} {t.name} {t.group_name ? `(Grupo ${t.group_name})` : ""}
+                  {t.name} {t.group_name ? `(Grupo ${t.group_name})` : ""}
                 </option>
               ))}
             </select>
@@ -240,8 +241,12 @@ function MatchRow({
             {match.group_name ? `Grupo ${match.group_name} · ` : ""}
             {formatMatchDate(match.match_date)} · {formatMatchTime(match.match_date)} hs
           </p>
-          <p className="truncate font-display text-base font-bold text-ink">
-            {match.home_team?.flag_emoji} {match.home_team?.name} vs {match.away_team?.flag_emoji} {match.away_team?.name}
+          <p className="flex min-w-0 items-center gap-1.5 truncate font-display text-base font-bold text-ink">
+            <FlagImage team={match.home_team} size="sm" />
+            <span className="truncate">{match.home_team?.name}</span>
+            <span className="text-ink/30">vs</span>
+            <FlagImage team={match.away_team} size="sm" />
+            <span className="truncate">{match.away_team?.name}</span>
           </p>
         </div>
         <button
@@ -271,7 +276,7 @@ function MatchRow({
               <select value={homeTeamId} onChange={(e) => setHomeTeamId(e.target.value)} className="input">
                 {teams.map((t) => (
                   <option key={t.id} value={t.id}>
-                    {t.flag_emoji} {t.name}
+                    {t.name}
                   </option>
                 ))}
               </select>
@@ -280,7 +285,7 @@ function MatchRow({
               <select value={awayTeamId} onChange={(e) => setAwayTeamId(e.target.value)} className="input">
                 {teams.map((t) => (
                   <option key={t.id} value={t.id}>
-                    {t.flag_emoji} {t.name}
+                    {t.name}
                   </option>
                 ))}
               </select>

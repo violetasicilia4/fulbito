@@ -1,12 +1,13 @@
+import { Medal, Trophy } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { getCurrentParticipant } from "@/lib/auth";
 
 export const dynamic = "force-dynamic";
 
 const PODIUM = [
-  { badge: "bg-amber-100 text-amber-600", medal: "🥇" },
-  { badge: "bg-slate-200 text-slate-500", medal: "🥈" },
-  { badge: "bg-orange-100 text-orange-600", medal: "🥉" },
+  { badge: "bg-amber-100 text-amber-600" },
+  { badge: "bg-slate-200 text-slate-500" },
+  { badge: "bg-orange-100 text-orange-600" },
 ];
 
 export default async function RankingPage() {
@@ -55,10 +56,15 @@ export default async function RankingPage() {
       )}
 
       {rows.length === 0 && (
-        <p className="premium-card p-5 text-center text-sm text-ink/60">
-          Todavía no hay puntos cargados. En cuanto se jueguen los primeros partidos y se
-          carguen los resultados, el ranking va a empezar a tomar forma. 🏆
-        </p>
+        <div className="premium-card flex flex-col items-center gap-2 p-5 text-center text-sm text-ink/60">
+          <span className="flex h-10 w-10 items-center justify-center rounded-full bg-pink/20 text-purple">
+            <Trophy className="h-4 w-4" strokeWidth={2.2} />
+          </span>
+          <p>
+            Todavía no hay puntos cargados. En cuanto se jueguen los primeros partidos y se
+            carguen los resultados, el ranking va a empezar a tomar forma.
+          </p>
+        </div>
       )}
 
       {rows.length > 0 && (
@@ -82,7 +88,7 @@ export default async function RankingPage() {
                         podium ? podium.badge : "bg-cream text-ink/40"
                       }`}
                     >
-                      {podium ? podium.medal : `#${index + 1}`}
+                      {podium ? <Medal className="h-4 w-4" strokeWidth={2.4} /> : `#${index + 1}`}
                     </span>
                     <div className="flex min-w-0 items-center gap-1.5">
                       <span className="truncate font-display text-sm font-bold text-ink sm:text-base">

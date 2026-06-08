@@ -1,3 +1,4 @@
+import { PenLine } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { getCurrentParticipant } from "@/lib/auth";
 import { PredictionsView } from "@/components/PredictionsView";
@@ -36,8 +37,9 @@ export default async function PrediccionesPage() {
           Cargá el resultado que imaginás para cada partido de la fase de grupos. Podés editarlas
           hasta el horario en que arranca cada partido.
         </p>
-        <div className="mt-2 inline-flex items-center gap-2 rounded-full bg-purple px-3 py-1.5 text-xs font-black uppercase tracking-tight text-pink">
-          ✏️ {totalPredicted} de {totalMatches} partidos con predicción cargada
+        <div className="mt-2 inline-flex items-center gap-1.5 rounded-full bg-purple px-3 py-1.5 text-xs font-black uppercase tracking-tight text-pink">
+          <PenLine className="h-3.5 w-3.5" strokeWidth={2.6} />
+          {totalPredicted} de {totalMatches} partidos con predicción cargada
         </div>
       </header>
 

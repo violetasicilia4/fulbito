@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { CheckCircle2 } from "lucide-react";
 import { TeamBadge } from "@/components/TeamBadge";
 import { StatusPill } from "@/components/StatusPill";
 import { formatMatchDate, formatMatchTime, hasKickedOff } from "@/lib/format";
@@ -183,7 +184,10 @@ export function PredictionCard({
                 : "Guardar predicción"}
           </button>
           {saveState === "saved" && !dirty && (
-            <span className="text-sm font-semibold text-pink-dark">✓ Guardada</span>
+            <span className="inline-flex items-center gap-1 text-sm font-semibold text-pink-dark">
+              <CheckCircle2 className="h-3.5 w-3.5" strokeWidth={2.4} />
+              Guardada
+            </span>
           )}
         </div>
       )}

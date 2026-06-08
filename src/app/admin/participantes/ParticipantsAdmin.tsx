@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { UserRound } from "lucide-react";
 import type { Participant } from "@/lib/supabase/types";
 
 export function ParticipantsAdmin({ initialParticipants }: { initialParticipants: Participant[] }) {
@@ -33,7 +34,7 @@ export function ParticipantsAdmin({ initialParticipants }: { initialParticipants
 
       setParticipants((prev) => [...prev, json.participant as Participant]);
       setNotice(
-        `Listo. Compartile a ${displayName} → su email (${json.participant.email}) y la clave que elegiste.`,
+        `Listo. Compartile a ${displayName} su email (${json.participant.email}) y la clave que elegiste.`,
       );
       setEmail("");
       setDisplayName("");
@@ -198,8 +199,8 @@ function ParticipantRow({
               className="h-10 w-10 shrink-0 rounded-full object-cover"
             />
           ) : (
-            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-purple-light/30 text-base">
-              🙂
+            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-purple-light/30 text-purple">
+              <UserRound className="h-5 w-5" strokeWidth={2} />
             </span>
           )}
           <div className="min-w-0">

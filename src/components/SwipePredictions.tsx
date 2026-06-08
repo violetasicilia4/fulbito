@@ -1,7 +1,18 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { Check, ChevronLeft, Minus, Plus, X, type LucideIcon } from "lucide-react";
+import {
+  ArrowRight,
+  Check,
+  CheckCircle2,
+  ChevronLeft,
+  Clock,
+  Minus,
+  PartyPopper,
+  Plus,
+  X,
+  type LucideIcon,
+} from "lucide-react";
 import { TeamBadge } from "@/components/TeamBadge";
 import { StatusPill } from "@/components/StatusPill";
 import { formatMatchDate, formatMatchTime, hasKickedOff } from "@/lib/format";
@@ -144,7 +155,7 @@ export function SwipePredictions({
   if (total === 0) {
     return (
       <p className="premium-card p-6 text-center text-sm text-ink/60">
-        Todavía no hay partidos cargados para pronosticar. ⚽️
+        Todavía no hay partidos cargados para pronosticar.
       </p>
     );
   }
@@ -325,16 +336,18 @@ function SwipeCard({
       onTransitionEnd={handleTransitionEnd}
     >
       <div
-        className="pointer-events-none absolute left-5 top-6 -rotate-12 rounded-2xl border-[3px] border-purple px-3 py-1 text-base font-black uppercase tracking-wider text-purple sm:text-lg"
+        className="pointer-events-none absolute left-5 top-6 flex items-center gap-1.5 -rotate-12 rounded-2xl border-[3px] border-purple px-3 py-1 text-base font-black uppercase tracking-wider text-purple sm:text-lg"
         style={{ opacity: Math.max(0, progress) }}
       >
-        Enviar ✓
+        <Check className="h-4 w-4 sm:h-5 sm:w-5" strokeWidth={3} />
+        Enviar
       </div>
       <div
-        className="pointer-events-none absolute right-5 top-6 rotate-12 rounded-2xl border-[3px] border-rose-400 px-3 py-1 text-base font-black uppercase tracking-wider text-rose-500 sm:text-lg"
+        className="pointer-events-none absolute right-5 top-6 flex items-center gap-1.5 rotate-12 rounded-2xl border-[3px] border-rose-400 px-3 py-1 text-base font-black uppercase tracking-wider text-rose-500 sm:text-lg"
         style={{ opacity: Math.max(0, -progress) }}
       >
-        Después ⏰
+        <Clock className="h-4 w-4 sm:h-5 sm:w-5" strokeWidth={3} />
+        Después
       </div>
 
       <div className="mb-4 flex items-center justify-between gap-2">
@@ -388,7 +401,7 @@ function SwipeCard({
           </p>
         ) : (
           <p className="text-xs font-medium text-ink/40">
-            Cargá el resultado y deslizá → para enviarlo, o ← para dejarlo para después.
+            Cargá el resultado y deslizá a la derecha para enviarlo, o a la izquierda para dejarlo para después.
           </p>
         )}
       </div>
@@ -422,7 +435,8 @@ function BigScoreStepper({
         aria-label={`Sumar un gol — ${label}`}
         disabled={disabled}
         onClick={() => onStep(1)}
-        className="flex h-9 w-9 items-center justify-center rounded-full bg-purple-light/60 text-purple transition-transform active:scale-90 disabled:cursor-not-allowed disabled:opacity-30"
+        onPointerDown={(e) => e.stopPropagation()}
+        className="flex h-11 w-11 touch-manipulation items-center justify-center rounded-full bg-purple-light/60 text-purple transition-transform active:scale-90 disabled:cursor-not-allowed disabled:opacity-30"
       >
         <Plus className="h-4 w-4" strokeWidth={3} />
       </button>
@@ -434,16 +448,18 @@ function BigScoreStepper({
         value={value}
         disabled={disabled}
         onChange={(event) => onChange(event.target.value)}
+        onPointerDown={(e) => e.stopPropagation()}
         aria-label={label}
         placeholder="–"
-        className="h-16 w-16 rounded-2xl border-2 border-line bg-cream text-center font-display text-3xl font-black text-ink outline-none transition-colors focus:border-purple focus:bg-white disabled:cursor-not-allowed disabled:opacity-50 sm:h-20 sm:w-20 sm:text-4xl [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+        className="h-16 w-16 touch-manipulation rounded-2xl border-2 border-line bg-cream text-center font-display text-3xl font-black text-ink outline-none transition-colors focus:border-purple focus:bg-white disabled:cursor-not-allowed disabled:opacity-50 sm:h-20 sm:w-20 sm:text-4xl [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
       />
       <button
         type="button"
         aria-label={`Restar un gol — ${label}`}
         disabled={disabled || value === "" || value === "0"}
         onClick={() => onStep(-1)}
-        className="flex h-9 w-9 items-center justify-center rounded-full bg-purple-light/60 text-purple transition-transform active:scale-90 disabled:cursor-not-allowed disabled:opacity-30"
+        onPointerDown={(e) => e.stopPropagation()}
+        className="flex h-11 w-11 touch-manipulation items-center justify-center rounded-full bg-purple-light/60 text-purple transition-transform active:scale-90 disabled:cursor-not-allowed disabled:opacity-30"
       >
         <Minus className="h-4 w-4" strokeWidth={3} />
       </button>
@@ -459,7 +475,10 @@ function SwipeProgress({ index, total, sentCount }: { index: number; total: numb
         <span>
           Partido {Math.min(index + 1, total)} de {total}
         </span>
-        <span>✓ {sentCount} enviados</span>
+        <span className="inline-flex items-center gap-1">
+          <CheckCircle2 className="h-3.5 w-3.5" strokeWidth={2.4} />
+          {sentCount} enviados
+        </span>
       </div>
       <div className="h-2 overflow-hidden rounded-full bg-cream">
         <div className="h-full rounded-full bg-purple transition-all duration-300 ease-out" style={{ width: `${pct}%` }} />
@@ -489,9 +508,10 @@ function SwipeActionBar({
         <button
           type="button"
           onClick={onSend}
-          className="rounded-full bg-purple px-6 py-3 text-sm font-black uppercase tracking-tight text-pink shadow-md shadow-purple/20 transition-transform active:scale-[0.98]"
+          className="flex items-center gap-1.5 rounded-full bg-purple px-6 py-3 text-sm font-black uppercase tracking-tight text-pink shadow-md shadow-purple/20 transition-transform active:scale-[0.98]"
         >
-          Siguiente →
+          Siguiente
+          <ArrowRight className="h-4 w-4" strokeWidth={2.6} />
         </button>
       ) : (
         <>
@@ -554,13 +574,15 @@ function SwipeCompletionCard({
 }) {
   return (
     <div className="premium-card flex flex-col items-center gap-3 p-8 text-center">
-      <span className="text-4xl">🎉</span>
+      <span className="flex h-12 w-12 items-center justify-center rounded-full bg-purple text-pink">
+        <PartyPopper className="h-5 w-5" strokeWidth={2.2} />
+      </span>
       <h2 className="font-display text-xl font-bold tracking-tight text-ink">¡Recorriste todos los partidos!</h2>
       <p className="text-sm leading-relaxed text-ink/60">
         Enviaste {sentCount} de {total} pronósticos.{" "}
         {pendingCount > 0
           ? `Dejaste ${pendingCount} ${pendingCount === 1 ? "partido" : "partidos"} para más tarde — podés revisarlos cuando quieras.`
-          : "¡No dejaste ninguno pendiente! 🙌"}
+          : "¡No dejaste ninguno pendiente!"}
       </p>
       <div className="mt-2 flex w-full flex-col gap-2 sm:flex-row">
         {pendingCount > 0 && (

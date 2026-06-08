@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Bell, Sparkles, Calendar, LayoutGrid, type LucideIcon } from "lucide-react";
+import { Bell, Sparkles, Calendar, LayoutGrid, Star, Target, type LucideIcon } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { getCurrentParticipant } from "@/lib/auth";
 import { PredictionCard } from "@/components/PredictionCard";
@@ -104,20 +104,22 @@ export default async function InicioPage() {
 
         {!featured && (
           <p className="premium-card p-5 text-center text-sm text-ink/60">
-            No hay partidos pendientes por el momento. ⚽️
+            No hay partidos pendientes por el momento.
           </p>
         )}
 
         {featured && (
           <div className="space-y-1.5">
             <span className="ml-1 inline-flex items-center gap-1.5 rounded-full bg-pink/20 px-2.5 py-1 text-[10px] font-black uppercase tracking-wider text-purple">
-              ⭐ Destacado de la comunidad
+              <Star className="h-3 w-3" strokeWidth={2.6} />
+              Destacado de la comunidad
             </span>
             <ul>
               <PredictionCard match={featured} prediction={predictionByMatch.get(featured.id) ?? null} />
             </ul>
-            <p className="px-1 text-center text-[11px] font-semibold text-ink/40">
-              Sumá puntos: resultado exacto +6 🎯
+            <p className="flex items-center justify-center gap-1 px-1 text-center text-[11px] font-semibold text-ink/40">
+              <Target className="h-3 w-3" strokeWidth={2.4} />
+              Sumá puntos: resultado exacto +6
             </p>
           </div>
         )}

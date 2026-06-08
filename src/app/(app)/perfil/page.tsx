@@ -39,19 +39,16 @@ export default async function PerfilPage() {
         <h1 className="font-display text-xl font-bold tracking-tight text-ink sm:text-2xl">Perfil</h1>
       </header>
 
-      <section className="premium-card flex items-center gap-3.5 p-3.5">
-        <div className="flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-full border-2 border-purple/15 bg-cream shadow-[0_4px_20px_rgba(0,0,0,0.04)]">
+      <section className="premium-card flex flex-col items-center gap-2.5 p-5 text-center">
+        <div className="flex h-24 w-24 shrink-0 items-center justify-center overflow-hidden rounded-full border-[3px] border-white bg-cream shadow-[0_8px_24px_-6px_rgba(7,27,74,0.18)] ring-1 ring-purple/10">
           {participant?.avatar_url ? (
             // eslint-disable-next-line @next/next/no-img-element
             <img src={participant.avatar_url} alt="" className="h-full w-full object-cover" />
           ) : (
-            <span className="font-display text-xl font-black text-purple">{initials || "👤"}</span>
+            <span className="font-display text-2xl font-black text-purple">{initials || "?"}</span>
           )}
         </div>
-        <div className="min-w-0">
-          <h2 className="truncate font-display text-base font-bold tracking-tight text-ink">{participant?.display_name}</h2>
-          <p className="truncate text-xs font-semibold text-ink/50">{participant?.email}</p>
-        </div>
+        <h2 className="font-display text-lg font-bold tracking-tight text-ink">{participant?.display_name}</h2>
       </section>
 
       <section className="grid grid-cols-2 gap-2">

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Calendar, Hourglass, PenLine, Trophy, Users, type LucideIcon } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 
 export const dynamic = "force-dynamic";
@@ -19,10 +20,10 @@ export default async function AdminHomePage() {
     ]);
 
   const cards = [
-    { label: "Participantes", value: participants ?? 0, emoji: "👯‍♀️" },
-    { label: "Partidos cargados", value: matches ?? 0, emoji: "📅" },
-    { label: "Predicciones cargadas", value: predictions ?? 0, emoji: "✏️" },
-    { label: "Partidos sin resultado cargado (ya empezaron)", value: pending ?? 0, emoji: "⏳" },
+    { label: "Participantes", value: participants ?? 0, icon: Users },
+    { label: "Partidos cargados", value: matches ?? 0, icon: Calendar },
+    { label: "Predicciones cargadas", value: predictions ?? 0, icon: PenLine },
+    { label: "Partidos sin resultado cargado (ya empezaron)", value: pending ?? 0, icon: Hourglass },
   ];
 
   return (
@@ -38,7 +39,9 @@ export default async function AdminHomePage() {
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
         {cards.map((card) => (
           <div key={card.label} className="rounded-3xl border border-line bg-white p-4 shadow-sm shadow-purple/5">
-            <p className="text-2xl">{card.emoji}</p>
+            <span className="flex h-9 w-9 items-center justify-center rounded-full bg-purple text-pink">
+              <card.icon className="h-4 w-4" strokeWidth={2.4} />
+            </span>
             <p className="mt-2 font-display text-2xl font-extrabold text-ink">{card.value}</p>
             <p className="mt-1 text-xs leading-snug text-ink/50">{card.label}</p>
           </div>
@@ -50,19 +53,19 @@ export default async function AdminHomePage() {
           href="/admin/participantes"
           title="Participantes"
           description="Crear, editar y compartir el acceso de cada amiga."
-          emoji="👯‍♀️"
+          icon={Users}
         />
         <AdminLink
           href="/admin/partidos"
           title="Partidos"
           description="Cargar o editar el fixture: equipos, fechas y horarios."
-          emoji="📅"
+          icon={Calendar}
         />
         <AdminLink
           href="/admin/resultados"
           title="Resultados"
           description="Cargar el resultado real de cada partido y recalcular puntos."
-          emoji="🏆"
+          icon={Trophy}
         />
       </div>
     </div>
@@ -73,19 +76,21 @@ function AdminLink({
   href,
   title,
   description,
-  emoji,
+  icon: Icon,
 }: {
   href: string;
   title: string;
   description: string;
-  emoji: string;
+  icon: LucideIcon;
 }) {
   return (
     <Link
       href={href}
       className="rounded-3xl border border-line bg-white p-5 shadow-sm shadow-purple/5 transition-transform hover:-translate-y-0.5 hover:border-purple/40"
     >
-      <p className="text-2xl">{emoji}</p>
+      <span className="flex h-9 w-9 items-center justify-center rounded-full bg-purple text-pink">
+        <Icon className="h-4 w-4" strokeWidth={2.4} />
+      </span>
       <p className="mt-2 font-display text-base font-bold text-ink">{title}</p>
       <p className="mt-1 text-sm leading-relaxed text-ink/60">{description}</p>
     </Link>
