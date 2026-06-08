@@ -1,11 +1,15 @@
-import { createClient } from "@/lib/supabase/server";
+import { createAdminClient } from "@/lib/supabase/admin";
 import { ParticipantsAdmin } from "./ParticipantsAdmin";
 
 export const dynamic = "force-dynamic";
 
 export default async function AdminParticipantsPage() {
-  const supabase = await createClient();
-  const { data: participants } = await supabase
+  // Cliente con service role: la policy de `participants` solo deja ver la
+  // propia fila, así que para listar a todas las participantes hace falta
+  // saltear RLS (esta página ya está protegida por AdminLayout, que exige
+  // is_admin).
+  const admin = createAdminClient();
+  const { data: participants } = await admin
     .from("participants")
     .select("*")
     .order("created_at", { ascending: true });

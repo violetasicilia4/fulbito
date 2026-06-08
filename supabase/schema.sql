@@ -159,14 +159,16 @@ alter table teams enable row level security;
 alter table matches enable row level security;
 alter table predictions enable row level security;
 
--- Cualquier persona logueada puede ver los nombres de las participantes
--- (se necesita para el ranking y la navegación), pero solo el admin
--- (vía service role, que ignora RLS) puede crear/editar participantes.
+-- Cada participante únicamente puede leer su propia fila (incluye su email,
+-- que es información privada). El ranking necesita mostrar nombres de otras
+-- participantes, pero lo resuelve la vista `ranking` de abajo, que agrega
+-- sin exponer columnas sensibles — por eso esta policy no necesita ser
+-- pública. Las altas/bajas las hace el panel admin con la service role key.
 drop policy if exists participants_select on participants;
 create policy participants_select on participants
   for select
   to authenticated
-  using (true);
+  using (auth_user_id = auth.uid());
 
 -- Equipos y partidos son de solo lectura para cualquier usuaria logueada.
 -- Las altas/bajas las hace el panel admin con la service role key.
@@ -225,8 +227,8 @@ select
   p.id as user_id,
   p.display_name,
   coalesce(sum(pr.points) filter (where pr.points is not null), 0)::int as total_points,
-  count(*) filter (where pr.points = 3) as exact_results,
-  count(*) filter (where pr.points = 1) as correct_outcomes,
+  count(*) filter (where pr.points = 6) as exact_results,
+  count(*) filter (where pr.points = 3) as correct_outcomes,
   count(pr.id) as predictions_count
 from participants p
 left join predictions pr on pr.user_id = p.id

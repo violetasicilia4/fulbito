@@ -1,18 +1,22 @@
 import Link from "next/link";
 import { Calendar, Hourglass, PenLine, Trophy, Users, type LucideIcon } from "lucide-react";
-import { createClient } from "@/lib/supabase/server";
+import { createAdminClient } from "@/lib/supabase/admin";
 
 export const dynamic = "force-dynamic";
 
 export default async function AdminHomePage() {
-  const supabase = await createClient();
+  // Cliente con service role: las policies de `participants` y `predictions`
+  // solo dejan ver la propia fila, así que para contar el total real de
+  // todas las participantes hace falta saltear RLS (esta página ya está
+  // protegida por AdminLayout, que exige is_admin).
+  const admin = createAdminClient();
 
   const [{ count: participants }, { count: matches }, { count: predictions }, { count: pending }] =
     await Promise.all([
-      supabase.from("participants").select("*", { count: "exact", head: true }),
-      supabase.from("matches").select("*", { count: "exact", head: true }),
-      supabase.from("predictions").select("*", { count: "exact", head: true }),
-      supabase
+      admin.from("participants").select("*", { count: "exact", head: true }),
+      admin.from("matches").select("*", { count: "exact", head: true }),
+      admin.from("predictions").select("*", { count: "exact", head: true }),
+      admin
         .from("matches")
         .select("*", { count: "exact", head: true })
         .lte("match_date", new Date().toISOString())
