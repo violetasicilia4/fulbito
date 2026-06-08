@@ -274,7 +274,7 @@ export function LoginForm() {
           <button
             type="submit"
             disabled={loading}
-            className="flex w-full items-center justify-center gap-2 rounded-full bg-purple px-4 py-3.5 text-sm font-black text-pink shadow-[0_10px_25px_rgba(11,25,87,0.22)] transition-all duration-150 active:scale-[0.98] disabled:opacity-60"
+            className="flex w-full items-center justify-center gap-2 rounded-full bg-purple px-4 py-3.5 text-sm font-black text-pink shadow-[0_10px_25px_rgba(13,27,58,0.22)] transition-all duration-150 active:scale-[0.98] disabled:opacity-60"
           >
             {loading
               ? mode === "login"

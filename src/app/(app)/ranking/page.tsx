@@ -33,7 +33,7 @@ export default async function RankingPage() {
       </header>
 
       {me && (
-        <div className="relative overflow-hidden rounded-[24px] bg-purple p-4 text-white shadow-[0_12px_30px_-10px_rgba(11,25,87,0.35)]">
+        <div className="relative overflow-hidden rounded-[24px] bg-purple p-4 text-white shadow-[0_12px_30px_-10px_rgba(13,27,58,0.35)]">
           <div className="pointer-events-none absolute -top-10 -right-10 h-32 w-32 rounded-full bg-pink/10 blur-2xl" />
           <div className="pointer-events-none absolute -bottom-10 -left-10 h-32 w-32 rounded-full bg-purple-light/15 blur-2xl" />
           <div className="relative grid grid-cols-2 gap-3">

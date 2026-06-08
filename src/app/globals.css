@@ -1,16 +1,16 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f8f3ea;
-  --foreground: #0b1957;
+  --background: #eaf5fc;
+  --foreground: #0d1b3a;
 
-  --color-prode-pink: #9eccfa;
-  --color-prode-pink-dark: #3d6ea6;
-  --color-prode-purple: #0b1957;
-  --color-prode-purple-light: #d1e8ff;
-  --color-prode-cream: #f1ebdc;
-  --color-prode-ink: #0b1957;
-  --color-prode-line: #e8e1d2;
+  --color-prode-pink: #4fc3f7;
+  --color-prode-pink-dark: #1f93d1;
+  --color-prode-purple: #0d1b3a;
+  --color-prode-purple-light: #d8eefb;
+  --color-prode-cream: #eaf5fc;
+  --color-prode-ink: #0d1b3a;
+  --color-prode-line: #d6e7f5;
 }
 
 @theme inline {
@@ -50,7 +50,7 @@ body {
   background-color: #fff;
   border: 1px solid var(--color-prode-line);
   border-radius: 28px;
-  box-shadow: 0 8px 30px -12px rgba(11, 25, 87, 0.1);
+  box-shadow: 0 8px 30px -12px rgba(13, 27, 58, 0.12);
 }
 
 .score-input {
@@ -69,7 +69,7 @@ body {
 .score-input:focus {
   border-color: var(--color-prode-purple);
   background-color: #fff;
-  box-shadow: 0 0 0 4px rgba(158, 204, 250, 0.45);
+  box-shadow: 0 0 0 4px rgba(79, 195, 247, 0.35);
 }
 
 .score-input:disabled {
