@@ -3,8 +3,11 @@ import { getCurrentParticipant } from "@/lib/auth";
 
 export const dynamic = "force-dynamic";
 
-const MEDALS = ["🥇", "🥈", "🥉"];
-const DOT_COLORS = ["bg-purple", "bg-pink", "bg-purple-light", "bg-pink-dark", "bg-ink/25"];
+const PODIUM = [
+  { badge: "bg-amber-100 text-amber-600", medal: "🥇" },
+  { badge: "bg-slate-200 text-slate-500", medal: "🥈" },
+  { badge: "bg-orange-100 text-orange-600", medal: "🥉" },
+];
 
 export default async function RankingPage() {
   const supabase = await createClient();
@@ -22,24 +25,24 @@ export default async function RankingPage() {
   const myRank = me ? rows.indexOf(me) + 1 : null;
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4">
       <header>
         <span className="eyebrow">General · Mundial 2026</span>
-        <h1 className="font-display text-2xl font-bold tracking-tight text-ink sm:text-3xl">Ranking</h1>
+        <h1 className="font-display text-xl font-bold tracking-tight text-ink sm:text-2xl">Ranking</h1>
       </header>
 
       {me && (
-        <div className="relative overflow-hidden rounded-[24px] bg-purple p-4 text-white shadow-[0_12px_30px_-10px_rgba(13,27,58,0.35)]">
+        <div className="relative overflow-hidden rounded-[24px] bg-purple p-4 text-white shadow-[0_12px_30px_-10px_rgba(7,27,74,0.35)]">
           <div className="pointer-events-none absolute -top-10 -right-10 h-32 w-32 rounded-full bg-pink/10 blur-2xl" />
           <div className="pointer-events-none absolute -bottom-10 -left-10 h-32 w-32 rounded-full bg-purple-light/15 blur-2xl" />
           <div className="relative grid grid-cols-2 gap-3">
             <div>
               <span className="block text-[10px] font-bold uppercase tracking-widest text-pink">Tu posición</span>
-              <span className="mt-0.5 block text-2xl font-black tracking-tight">{myRank}° lugar</span>
+              <span className="mt-0.5 block text-xl font-black tracking-tight">{myRank}° lugar</span>
             </div>
             <div className="text-right">
               <span className="block text-[10px] font-bold uppercase tracking-widest text-pink">Tus puntos</span>
-              <span className="mt-0.5 block text-2xl font-black tracking-tight">
+              <span className="mt-0.5 block text-xl font-black tracking-tight">
                 {me.total_points} <span className="text-xs font-semibold text-pink">pts</span>
               </span>
             </div>
@@ -52,7 +55,7 @@ export default async function RankingPage() {
       )}
 
       {rows.length === 0 && (
-        <p className="premium-card p-6 text-center text-sm text-ink/60">
+        <p className="premium-card p-5 text-center text-sm text-ink/60">
           Todavía no hay puntos cargados. En cuanto se jueguen los primeros partidos y se
           carguen los resultados, el ranking va a empezar a tomar forma. 🏆
         </p>
@@ -61,21 +64,25 @@ export default async function RankingPage() {
       {rows.length > 0 && (
         <section className="space-y-1.5">
           <span className="eyebrow pl-1">Posiciones</span>
-          <ul className="premium-card space-y-2.5 p-3">
+          <ul className="premium-card space-y-1.5 p-2.5">
             {rows.map((row, index) => {
               const isMe = participant?.id === row.user_id;
-              const dot = DOT_COLORS[index % DOT_COLORS.length];
+              const podium = PODIUM[index];
+              const isLeader = index === 0;
               return (
                 <li
                   key={row.user_id}
                   className={`flex items-center justify-between gap-3 rounded-2xl px-2.5 py-2 transition-colors ${
-                    isMe ? "border border-line bg-cream" : ""
+                    isMe ? "border border-line bg-cream" : isLeader ? "bg-amber-50/60" : ""
                   }`}
                 >
                   <div className="flex min-w-0 items-center gap-2.5">
-                    <span className={`h-2 w-2 shrink-0 rounded-full ${dot}`} aria-hidden />
-                    <span className="w-6 shrink-0 text-center text-sm font-black text-ink/40">
-                      {MEDALS[index] ?? `#${index + 1}`}
+                    <span
+                      className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-sm font-black ${
+                        podium ? podium.badge : "bg-cream text-ink/40"
+                      }`}
+                    >
+                      {podium ? podium.medal : `#${index + 1}`}
                     </span>
                     <div className="flex min-w-0 items-center gap-1.5">
                       <span className="truncate font-display text-sm font-bold text-ink sm:text-base">
@@ -94,7 +101,7 @@ export default async function RankingPage() {
                       {row.exact_results} exactos · {row.correct_outcomes} aciertos
                     </span>
                     <div className="flex items-baseline gap-1">
-                      <span className="font-display text-xl font-black text-purple">{row.total_points}</span>
+                      <span className="font-display text-2xl font-black text-purple">{row.total_points}</span>
                       <span className="text-[10px] font-bold uppercase tracking-wide text-ink/40">pts</span>
                     </div>
                   </div>

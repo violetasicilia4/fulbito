@@ -25,7 +25,7 @@ export function FixtureView({
   const days = tab === "proximos" ? upcomingDays : pastDays;
 
   return (
-    <div className="space-y-5">
+    <div className="space-y-4">
       <div className="inline-flex w-full gap-1 rounded-full bg-cream p-1 sm:w-auto">
         <TabButton active={tab === "proximos"} onClick={() => setTab("proximos")}>
           📅 Próximos partidos
@@ -36,7 +36,7 @@ export function FixtureView({
       </div>
 
       {days.length === 0 && (
-        <p className="premium-card p-6 text-center text-sm text-ink/60">
+        <p className="premium-card p-5 text-center text-sm text-ink/60">
           {tab === "proximos"
             ? "No hay partidos próximos por el momento. ⚽️"
             : "Todavía no se jugó ningún partido. ⚽️"}
@@ -45,30 +45,34 @@ export function FixtureView({
 
       {days.map(([dateLabel, dayMatches]) => (
         <section key={dateLabel}>
-          <h2 className="mb-3 inline-flex items-center gap-2 font-display text-lg font-bold capitalize tracking-tight text-purple">
-            <span className="flex h-7 w-7 items-center justify-center rounded-full bg-pink/20 text-sm">
+          <h2 className="mb-2 inline-flex items-center gap-2 font-display text-base font-bold capitalize tracking-tight text-purple">
+            <span className="flex h-6 w-6 items-center justify-center rounded-full bg-pink/20 text-xs">
               📅
             </span>
             {dateLabel}
           </h2>
-          <ul className="space-y-3">
+          <ul className="space-y-2">
             {dayMatches.map((match) => {
               const status = STATUS_LABEL[match.status] ?? STATUS_LABEL.scheduled;
               const played = match.home_score !== null && match.away_score !== null;
               return (
-                <li key={match.id} className="premium-card p-4 sm:p-5">
-                  <div className="mb-3 flex items-center justify-between">
+                <li key={match.id} className="premium-card p-3.5 sm:p-4">
+                  <div className="mb-2.5 flex items-center justify-between">
                     <span className="eyebrow">
                       Grupo {match.group_name} · {formatMatchTime(match.match_date)} hs
                     </span>
                     <StatusPill tone={status.tone}>{status.label}</StatusPill>
                   </div>
 
-                  <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-3">
+                  <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-2">
                     <TeamBadge team={match.home_team} />
-                    <div className="rounded-2xl bg-purple px-3 py-1.5 text-center font-display text-lg font-bold text-pink">
-                      {played ? `${match.home_score} – ${match.away_score}` : "vs"}
-                    </div>
+                    {played ? (
+                      <div className="rounded-lg bg-purple/[0.06] px-2 py-1 text-center font-display text-sm font-bold text-purple">
+                        {match.home_score} – {match.away_score}
+                      </div>
+                    ) : (
+                      <span className="text-center text-[11px] font-bold uppercase tracking-wider text-ink/30">vs</span>
+                    )}
                     <TeamBadge team={match.away_team} align="end" />
                   </div>
                 </li>

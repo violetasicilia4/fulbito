@@ -19,11 +19,11 @@ export default async function FixturePage() {
   const past = matchList.filter((match) => hasKickedOff(match.match_date, now)).reverse();
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-3.5">
       <header>
         <span className="eyebrow">Fixture &amp; calendario</span>
-        <h1 className="font-display text-2xl font-bold tracking-tight text-ink sm:text-3xl">Fixture oficial</h1>
-        <p className="mt-1 text-sm leading-relaxed text-ink/60">
+        <h1 className="font-display text-xl font-bold tracking-tight text-ink sm:text-2xl">Fixture oficial</h1>
+        <p className="mt-0.5 text-sm leading-relaxed text-ink/60">
           Fase de grupos del Mundial 2026.
         </p>
       </header>

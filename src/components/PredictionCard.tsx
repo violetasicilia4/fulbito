@@ -119,8 +119,8 @@ export function PredictionCard({
   }
 
   return (
-    <li className="premium-card p-4 sm:p-5">
-      <div className="mb-3 flex items-center justify-between">
+    <li className="premium-card p-3.5 sm:p-4">
+      <div className="mb-2.5 flex items-center justify-between">
         <span className="eyebrow">
           {formatMatchDate(match.match_date)} · {formatMatchTime(match.match_date)} hs
         </span>
@@ -150,7 +150,7 @@ export function PredictionCard({
       </div>
 
       {savedPrediction && (
-        <p className="mt-3 rounded-2xl bg-cream px-3 py-2 text-center text-xs font-semibold text-ink/70">
+        <p className="mt-2.5 rounded-2xl bg-cream px-3 py-2 text-center text-xs font-semibold text-ink/70">
           {dirty
             ? `Tu predicción guardada es ${savedPrediction.predicted_home_score} – ${savedPrediction.predicted_away_score}. Cambiá los goles y volvé a guardar para actualizarla.`
             : `Guardaste tu predicción: ${match.home_team?.name ?? "Local"} ${savedPrediction.predicted_home_score} – ${savedPrediction.predicted_away_score} ${match.away_team?.name ?? "Visitante"}.`}
@@ -158,18 +158,18 @@ export function PredictionCard({
       )}
 
       {finished && match.home_score !== null && match.away_score !== null && (
-        <p className="mt-3 text-center text-xs font-medium text-ink/50">
+        <p className="mt-2.5 text-center text-xs font-medium text-ink/50">
           Resultado real: {match.home_team?.name} {match.home_score} – {match.away_score}{" "}
           {match.away_team?.name}
         </p>
       )}
 
       {locked ? (
-        <p className="mt-3 rounded-2xl bg-cream px-3 py-2 text-center text-xs font-medium text-ink/60">
+        <p className="mt-2.5 rounded-2xl bg-cream px-3 py-2 text-center text-xs font-medium text-ink/60">
           {LOCKED_MESSAGE}
         </p>
       ) : (
-        <div className="mt-3 flex items-center gap-3">
+        <div className="mt-2.5 flex items-center gap-3">
           <button
             type="button"
             onClick={handleSave}

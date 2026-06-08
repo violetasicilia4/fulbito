@@ -169,7 +169,7 @@ export function MatchesAdmin({ teams, initialMatches }: { teams: Team[]; initial
         }
         :global(.input:focus) {
           border-color: var(--color-prode-pink);
-          box-shadow: 0 0 0 3px rgba(79, 195, 247, 0.3);
+          box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.3);
         }
       `}</style>
     </div>

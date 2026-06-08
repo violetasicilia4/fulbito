@@ -28,15 +28,15 @@ export default async function PrediccionesPage() {
   const totalPredicted = predictionList.length;
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-3.5">
       <header>
         <span className="eyebrow">Pronósticos oficiales</span>
-        <h1 className="font-display text-2xl font-bold tracking-tight text-ink sm:text-3xl">Mis predicciones</h1>
-        <p className="mt-1 text-sm leading-relaxed text-ink/60">
+        <h1 className="font-display text-xl font-bold tracking-tight text-ink sm:text-2xl">Mis predicciones</h1>
+        <p className="mt-0.5 text-sm leading-relaxed text-ink/60">
           Cargá el resultado que imaginás para cada partido de la fase de grupos. Podés editarlas
           hasta el horario en que arranca cada partido.
         </p>
-        <div className="mt-3 inline-flex items-center gap-2 rounded-full bg-purple px-3 py-1.5 text-xs font-black uppercase tracking-tight text-pink">
+        <div className="mt-2 inline-flex items-center gap-2 rounded-full bg-purple px-3 py-1.5 text-xs font-black uppercase tracking-tight text-pink">
           ✏️ {totalPredicted} de {totalMatches} partidos con predicción cargada
         </div>
       </header>

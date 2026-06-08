@@ -1,16 +1,16 @@
 @import "tailwindcss";
 
 :root {
-  --background: #eaf5fc;
-  --foreground: #0d1b3a;
+  --background: #f6fafc;
+  --foreground: #0f172a;
 
-  --color-prode-pink: #4fc3f7;
-  --color-prode-pink-dark: #1f93d1;
-  --color-prode-purple: #0d1b3a;
-  --color-prode-purple-light: #d8eefb;
-  --color-prode-cream: #eaf5fc;
-  --color-prode-ink: #0d1b3a;
-  --color-prode-line: #d6e7f5;
+  --color-prode-pink: #38bdf8;
+  --color-prode-pink-dark: #0ea5e9;
+  --color-prode-purple: #071b4a;
+  --color-prode-purple-light: #e0f2fe;
+  --color-prode-cream: #eef6fa;
+  --color-prode-ink: #0f172a;
+  --color-prode-line: #dceaf3;
 }
 
 @theme inline {
@@ -49,14 +49,14 @@ body {
 .premium-card {
   background-color: #fff;
   border: 1px solid var(--color-prode-line);
-  border-radius: 28px;
-  box-shadow: 0 8px 30px -12px rgba(13, 27, 58, 0.12);
+  border-radius: 24px;
+  box-shadow: 0 6px 24px -14px rgba(7, 27, 74, 0.14);
 }
 
 .score-input {
-  width: 2.75rem;
-  height: 2.75rem;
-  border-radius: 1rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.875rem;
   border: 1.5px solid var(--color-prode-line);
   background-color: var(--color-prode-cream);
   text-align: center;
@@ -69,7 +69,7 @@ body {
 .score-input:focus {
   border-color: var(--color-prode-purple);
   background-color: #fff;
-  box-shadow: 0 0 0 4px rgba(79, 195, 247, 0.35);
+  box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.35);
 }
 
 .score-input:disabled {

@@ -25,7 +25,7 @@ export function TopBar({ isAdmin }: { isAdmin: boolean }) {
 
   return (
     <header className="sticky top-0 z-20 border-b border-line bg-white/90 backdrop-blur supports-[backdrop-filter]:bg-white/75">
-      <div className="mx-auto flex max-w-3xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
+      <div className="mx-auto flex max-w-3xl items-center justify-between gap-4 px-4 py-2.5 sm:px-6">
         <Link href="/inicio" className="flex items-center gap-2 font-display text-lg font-bold text-pink-dark">
           <span aria-hidden>⚽️</span>
           Prode 2026

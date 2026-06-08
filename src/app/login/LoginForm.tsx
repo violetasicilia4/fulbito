@@ -133,29 +133,24 @@ export function LoginForm() {
   }
 
   return (
-    <main className="relative flex flex-1 flex-col items-center justify-center overflow-hidden bg-pink px-4 py-10">
+    <main className="relative flex flex-1 flex-col items-center justify-center overflow-hidden bg-pink px-4 py-6">
       <div className="pointer-events-none absolute -top-16 -right-16 h-64 w-64 rounded-full bg-white/20 blur-3xl" />
       <div className="pointer-events-none absolute -bottom-20 -left-16 h-64 w-64 rounded-full bg-purple/10 blur-3xl" />
 
       <div className="relative w-full max-w-sm">
-        <div className="mb-7">
-          <div className="mb-4 flex h-9 w-9 items-center justify-center rounded-2xl bg-purple text-lg">
+        <div className="mb-5">
+          <div className="mb-3 flex h-8 w-8 items-center justify-center rounded-xl bg-purple text-base">
             🏆
           </div>
-          <h1 className="font-display text-4xl font-black leading-[1.05] tracking-tight text-purple">
-            Predecí el
-            <br />
-            Mundial
-            <br />
-            sin esfuerzo
+          <h1 className="font-display text-[1.75rem] font-black leading-[1.1] tracking-tight text-purple">
+            Predecí el Mundial sin esfuerzo
           </h1>
-          <p className="mt-3 max-w-[280px] text-[13px] font-medium leading-relaxed text-purple/80">
-            Cargá tus predicciones del Mundial 2026, competí con tus amigas y seguí el
-            ranking en una app pensada para el grupo.
+          <p className="mt-2 max-w-[260px] text-xs font-medium leading-relaxed text-purple/80">
+            Cargá tus predicciones del Mundial 2026, competí con tus amigas y seguí el ranking.
           </p>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-3.5">
+        <form onSubmit={handleSubmit} className="space-y-3">
           <div className="grid grid-cols-2 gap-1.5 rounded-full bg-white/40 p-1 backdrop-blur-sm">
             <button
               type="button"
@@ -274,7 +269,7 @@ export function LoginForm() {
           <button
             type="submit"
             disabled={loading}
-            className="flex w-full items-center justify-center gap-2 rounded-full bg-purple px-4 py-3.5 text-sm font-black text-pink shadow-[0_10px_25px_rgba(13,27,58,0.22)] transition-all duration-150 active:scale-[0.98] disabled:opacity-60"
+            className="flex w-full items-center justify-center gap-2 rounded-full bg-purple px-4 py-3.5 text-sm font-black text-pink shadow-[0_10px_25px_rgba(7,27,74,0.22)] transition-all duration-150 active:scale-[0.98] disabled:opacity-60"
           >
             {loading
               ? mode === "login"
