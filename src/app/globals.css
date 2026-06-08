@@ -77,6 +77,19 @@ body {
   color: color-mix(in srgb, var(--color-prode-ink) 35%, transparent);
 }
 
+@keyframes card-enter {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.swipe-card-enter {
+  animation: card-enter 0.28s ease-out;
+}
+
 ::selection {
   background: var(--color-prode-pink);
   color: var(--color-prode-ink);
