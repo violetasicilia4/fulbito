@@ -338,14 +338,14 @@ function SwipeCard({
       </div>
 
       <div className="mb-4 flex items-center justify-between gap-2">
-        <span className="eyebrow truncate">
+        <span className="eyebrow min-w-0 flex-1 truncate">
           Grupo {match.group_name} · {formatMatchDate(match.match_date)} · {formatMatchTime(match.match_date)} hs
         </span>
         <StatusPill tone={statusTone}>{statusLabel}</StatusPill>
       </div>
 
-      <div className="flex flex-1 flex-col items-center justify-center gap-7">
-        <div className="flex w-full items-center justify-between gap-3">
+      <div className="flex flex-1 flex-col items-center justify-center gap-6 sm:gap-7">
+        <div className="grid w-full grid-cols-[1fr_auto_1fr] items-center gap-2 sm:gap-3">
           <TeamBadge team={match.home_team} />
           <span className="font-display text-xs font-black uppercase tracking-widest text-ink/25">vs</span>
           <TeamBadge team={match.away_team} align="end" />
